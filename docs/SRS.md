@@ -12,11 +12,14 @@ El servidor debe cubrir la totalidad de la API REST de WooCommerce v3 y funciona
 - **Clientes**: Gestión de perfiles y descargas.
 - **Cupones**: Gestión de descuentos.
 - **Envíos y Tasas**: Configuración de zonas, métodos y clases de impuestos.
-- **Reportes**: Análisis de ventas, stock y clientes.
-- **Sistema**: Estado del sistema, herramientas de mantenimiento y ajustes de tienda.
+- **Reportes**: Análisis de ventas, stock, clientes y reportes de totales.
+- **Sistema**: Estado del sistema, herramientas de mantenimiento, ajustes de tienda, webhooks, plugins y temas.
+- **Operaciones Batch**: Soporte para creación y actualización masiva de productos y pedidos.
 
 ### 2.2 Módulos WordPress
 - **Posts**: Gestión de contenido básico.
+- **Media**: Gestión de la biblioteca de medios.
+- **Usuarios**: Gestión completa de usuarios y roles de WordPress.
 - **Meta Data**: Gestión de metadatos personalizados para posts, productos, pedidos y clientes.
 
 ## 3. Requerimientos Técnicos
