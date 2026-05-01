@@ -1,6 +1,11 @@
+import * as dotenv from 'dotenv';
+
+// Load .env file
+dotenv.config();
+
 export const config = {
   wordpress: {
-    siteUrl: process.env.WORDPRESS_SITE_URL || "",
+    siteUrl: process.env.WOOCOMMERCE_URL || process.env.WORDPRESS_SITE_URL || "",
     username: process.env.WORDPRESS_USERNAME || "",
     password: process.env.WORDPRESS_PASSWORD || "",
   },

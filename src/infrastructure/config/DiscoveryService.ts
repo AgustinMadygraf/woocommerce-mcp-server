@@ -18,14 +18,48 @@ export class DiscoveryService {
    * Intenta descubrir configuraciones de diversos clientes MCP
    */
   async discover(): Promise<McpConfig> {
+    // 1. Intentar cargar desde .env (si existe)
+    const envConfig = this.discoverEnv();
+    if (envConfig && envConfig.siteUrl && envConfig.consumerKey) {
+      Logger.info('Configuración cargada desde .env');
+      return envConfig;
+    }
+
+    // 2. Intentar cargar desde Gemini
     const geminiConfig = this.discoverGemini();
     if (geminiConfig) {
       Logger.info('Entorno Gemini CLI detectado');
       return geminiConfig;
     }
 
-    // Aquí se pueden añadir más estrategias (Claude, etc.)
     return {};
+  }
+
+  /**
+   * Estrategia para archivo .env local
+   */
+  private discoverEnv(): McpConfig | null {
+    const envPath = path.join(process.cwd(), '.env');
+    if (fs.existsSync(envPath)) {
+      try {
+        const content = fs.readFileSync(envPath, 'utf-8');
+        const config: McpConfig = {};
+        
+        content.split('\n').forEach(line => {
+          const [key, value] = line.split('=').map(s => s.trim());
+          if (key === 'WOOCOMMERCE_URL' || key === 'WORDPRESS_SITE_URL') config.siteUrl = value;
+          if (key === 'WOOCOMMERCE_CONSUMER_KEY') config.consumerKey = value;
+          if (key === 'WOOCOMMERCE_CONSUMER_SECRET') config.consumerSecret = value;
+          if (key === 'WORDPRESS_USERNAME') config.username = value;
+          if (key === 'WORDPRESS_PASSWORD') config.password = value;
+        });
+
+        return config;
+      } catch (e) {
+        Logger.error('Error leyendo archivo .env', e);
+      }
+    }
+    return null;
   }
 
   /**
@@ -39,7 +73,7 @@ export class DiscoveryService {
         const woo = content.mcpServers?.woocommerce?.env;
         if (woo) {
           return {
-            siteUrl: woo.WORDPRESS_SITE_URL,
+            siteUrl: woo.WOOCOMMERCE_URL || woo.WORDPRESS_SITE_URL,
             username: woo.WORDPRESS_USERNAME,
             password: woo.WORDPRESS_PASSWORD,
             consumerKey: woo.WOOCOMMERCE_CONSUMER_KEY,
@@ -57,7 +91,37 @@ export class DiscoveryService {
    * Guarda la configuración en el cliente detectado
    */
   async saveConfig(config: McpConfig): Promise<boolean> {
-    // Por ahora priorizamos guardar en Gemini si existe el directorio
+    const results = await Promise.all([
+      this.saveToEnv(config),
+      this.saveToGeminiIfPossible(config)
+    ]);
+    
+    return results.some(r => r === true);
+  }
+
+  private async saveToEnv(config: McpConfig): Promise<boolean> {
+    try {
+      const envPath = path.join(process.cwd(), '.env');
+      const lines = [
+        `# WooCommerce MCP Configuration`,
+        `WOOCOMMERCE_URL=${config.siteUrl || ''}`,
+        `WOOCOMMERCE_CONSUMER_KEY=${config.consumerKey || ''}`,
+        `WOOCOMMERCE_CONSUMER_SECRET=${config.consumerSecret || ''}`,
+      ];
+
+      if (config.username) lines.push(`WORDPRESS_USERNAME=${config.username}`);
+      if (config.password) lines.push(`WORDPRESS_PASSWORD=${config.password}`);
+
+      fs.writeFileSync(envPath, lines.join('\n'));
+      Logger.info(`Configuración guardada en ${envPath}`);
+      return true;
+    } catch (e) {
+      Logger.error('Error guardando archivo .env', e);
+      return false;
+    }
+  }
+
+  private async saveToGeminiIfPossible(config: McpConfig): Promise<boolean> {
     const geminiDir = path.join(this.homeDir, '.gemini');
     if (fs.existsSync(geminiDir)) {
       return this.saveToGemini(config);
@@ -79,11 +143,11 @@ export class DiscoveryService {
         command: "node",
         args: [path.join(process.cwd(), "build", "index.js")],
         env: {
-          WORDPRESS_SITE_URL: config.siteUrl,
-          WORDPRESS_USERNAME: config.username,
-          WORDPRESS_PASSWORD: config.password,
+          WOOCOMMERCE_URL: config.siteUrl,
           WOOCOMMERCE_CONSUMER_KEY: config.consumerKey,
           WOOCOMMERCE_CONSUMER_SECRET: config.consumerSecret,
+          WORDPRESS_USERNAME: config.username,
+          WORDPRESS_PASSWORD: config.password,
           LOG_LEVEL: "INFO"
         }
       };
@@ -97,3 +161,4 @@ export class DiscoveryService {
     }
   }
 }
+

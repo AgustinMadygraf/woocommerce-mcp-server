@@ -34,38 +34,33 @@ npm run build
 
 ## Configuration
 
-Add the server to your MCP settings file with environment variables for credentials:
+The server can be configured using a `.env` file in the root directory or through environment variables in your MCP client settings.
 
-```json
-{
-  "mcpServers": {
-    "woocommerce": {
-      "command": "node",
-      "args": ["path/to/build/index.js"],
-      "env": {
-        "WORDPRESS_SITE_URL": "https://your-wordpress-site.com",
-        "WOOCOMMERCE_CONSUMER_KEY": "your-woocommerce-consumer-key",
-        "WOOCOMMERCE_CONSUMER_SECRET": "your-woocommerce-consumer-secret",
-        "WORDPRESS_USERNAME": "your-wordpress-username",
-        "WORDPRESS_PASSWORD": "your-wordpress-password"
-      }
-    }
-  }
-}
+### Automatic Configuration
+The easiest way to configure the server is to run the built-in assistant:
+```bash
+npm run configure
+```
+This will guide you through the process and create a `.env` file for you.
+
+### Manual Configuration (.env)
+Create a `.env` file in the root directory with the following **3 core variables**:
+
+```env
+WOOCOMMERCE_URL=https://your-store.com
+WOOCOMMERCE_CONSUMER_KEY=ck_your_consumer_key
+WOOCOMMERCE_CONSUMER_SECRET=cs_your_consumer_secret
 ```
 
-### Environment Variables
+#### Environment Variables Detail:
+- `WOOCOMMERCE_URL`: Your WordPress/WooCommerce site URL.
+- `WOOCOMMERCE_CONSUMER_KEY`: WooCommerce REST API consumer key (Read/Write access recommended).
+- `WOOCOMMERCE_CONSUMER_SECRET`: WooCommerce REST API consumer secret.
 
-#### Required for WooCommerce API access:
-- `WORDPRESS_SITE_URL`: Your WordPress site URL (WooCommerce is a WordPress plugin)
-- `WOOCOMMERCE_CONSUMER_KEY`: WooCommerce REST API consumer key
-- `WOOCOMMERCE_CONSUMER_SECRET`: WooCommerce REST API consumer secret
+#### Optional Variables (for WordPress API):
+- `WORDPRESS_USERNAME`: WordPress username.
+- `WORDPRESS_PASSWORD`: WordPress application password.
 
-#### Required only for WordPress API methods:
-- `WORDPRESS_USERNAME`: WordPress username with appropriate permissions
-- `WORDPRESS_PASSWORD`: WordPress password for authentication
-
-You can also provide these credentials in the request parameters if you prefer not to use environment variables.
 
 ## Authentication Options
 
