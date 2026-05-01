@@ -7,6 +7,9 @@ export const config = {
   woocommerce: {
     consumerKey: process.env.WOOCOMMERCE_CONSUMER_KEY || "",
     consumerSecret: process.env.WOOCOMMERCE_CONSUMER_SECRET || "",
+  },
+  logging: {
+    level: process.env.LOG_LEVEL || "INFO",
   }
 };
 

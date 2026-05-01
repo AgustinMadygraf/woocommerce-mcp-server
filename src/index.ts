@@ -7,6 +7,16 @@ import { config } from "./infrastructure/config/env";
 import { WooCommerceClient } from "./infrastructure/api/WooCommerceClient";
 import { WordPressClient } from "./infrastructure/api/WordPressClient";
 import { RequestDispatcher } from "./interfaces/mcp/RequestDispatcher";
+import { Logger, LogLevel } from "./infrastructure/logging/Logger";
+
+// Configure Logger
+const logLevelMap: Record<string, LogLevel> = {
+  DEBUG: LogLevel.DEBUG,
+  INFO: LogLevel.INFO,
+  WARN: LogLevel.WARN,
+  ERROR: LogLevel.ERROR,
+};
+Logger.setLevel(logLevelMap[config.logging.level] ?? LogLevel.INFO);
 
 import { JsonRpcRequest, JsonRpcResponse } from "./interfaces/mcp/JsonRpc";
 
@@ -42,6 +52,7 @@ async function handleWooCommerceRequest(
   method: string,
   params: any
 ): Promise<any> {
+  Logger.debug(`Handling request: ${method}`, params);
   try {
     const siteUrl = params.siteUrl || config.wordpress.siteUrl;
     const username = params.username || config.wordpress.username;
@@ -1816,6 +1827,7 @@ rl.on("line", async (line) => {
   let request: JsonRpcRequest;
   try {
     request = JSON.parse(line);
+    Logger.debug(`Received JSON-RPC request: ${request.method}`, { id: request.id });
     if (request.jsonrpc !== "2.0") {
       throw new Error("Invalid JSON-RPC version");
     }
@@ -1861,8 +1873,9 @@ rl.on("line", async (line) => {
 });
 
 process.on("SIGINT", () => {
+  Logger.info("Shutting down WooCommerce MCP server...");
   rl.close();
   process.exit(0);
 });
 
-console.error("WooCommerce MCP server running on stdin/stdout");
+Logger.info("WooCommerce MCP server running on stdin/stdout");

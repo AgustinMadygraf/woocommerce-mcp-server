@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { config } from "../config/env";
+import { Logger } from "../logging/Logger";
 
 export interface ApiClientOptions {
   baseURL: string;
@@ -36,21 +37,25 @@ export class ApiClient {
   }
 
   async get<T>(url: string, params?: any): Promise<T> {
+    Logger.debug(`GET ${this.client.defaults.baseURL}${url}`, { params });
     const response = await this.client.get<T>(url, { params });
     return response.data;
   }
 
   async post<T>(url: string, data?: any): Promise<T> {
+    Logger.debug(`POST ${this.client.defaults.baseURL}${url}`, { data });
     const response = await this.client.post<T>(url, data);
     return response.data;
   }
 
   async put<T>(url: string, data?: any): Promise<T> {
+    Logger.debug(`PUT ${this.client.defaults.baseURL}${url}`, { data });
     const response = await this.client.put<T>(url, data);
     return response.data;
   }
 
   async delete<T>(url: string, params?: any): Promise<T> {
+    Logger.debug(`DELETE ${this.client.defaults.baseURL}${url}`, { params });
     const response = await this.client.delete<T>(url, { params });
     return response.data;
   }
