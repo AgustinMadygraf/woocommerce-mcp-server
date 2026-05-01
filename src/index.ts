@@ -43,11 +43,11 @@ async function handleWooCommerceRequest(
   params: any
 ): Promise<any> {
   try {
-    const siteUrl = params.siteUrl || DEFAULT_SITE_URL;
-    const username = params.username || DEFAULT_USERNAME;
-    const password = params.password || DEFAULT_PASSWORD;
-    const consumerKey = params.consumerKey || DEFAULT_CONSUMER_KEY;
-    const consumerSecret = params.consumerSecret || DEFAULT_CONSUMER_SECRET;
+    const siteUrl = params.siteUrl || config.wordpress.siteUrl;
+    const username = params.username || config.wordpress.username;
+    const password = params.password || config.wordpress.password;
+    const consumerKey = params.consumerKey || config.woocommerce.consumerKey;
+    const consumerSecret = params.consumerSecret || config.woocommerce.consumerSecret;
 
     if (!siteUrl) {
       throw new Error(

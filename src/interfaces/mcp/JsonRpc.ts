@@ -7,7 +7,7 @@ export interface JsonRpcRequest {
 
 export interface JsonRpcResponse {
   jsonrpc: "2.0";
-  id: string | number;
+  id: string | number | null;
   result?: any;
   error?: {
     code: number;
