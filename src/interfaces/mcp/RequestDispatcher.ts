@@ -89,9 +89,9 @@ export class RequestDispatcher {
 
     const systemMethods = [
       "get_payment_gateways", "get_payment_gateway", "update_payment_gateway",
-      "get_settings_groups", "get_settings_group", "update_settings_option",
+      "get_settings", "get_setting_options", "update_settings_option",
       "get_system_status", "get_system_status_tools", "run_system_status_tool",
-      "get_data_indices", "get_continents", "get_countries", "get_currencies"
+      "get_data", "get_data_index", "get_continents", "get_countries", "get_currencies", "get_current_currency"
     ];
 
     if (productMethods.includes(method)) return this.productController.handle(method, params);

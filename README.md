@@ -8,6 +8,13 @@ A Model Context Protocol (MCP) server for WooCommerce integration, compatible wi
 
 This MCP server enables interaction with WooCommerce stores through the WordPress REST API. It provides comprehensive tools for managing all aspects of products, orders, customers, shipping, taxes, discounts, and store configuration using JSON-RPC 2.0 protocol.
 
+## Documentation
+
+Detailed documentation about the project structure and how to extend it:
+
+- [Architecture Overview](docs/architecture.md) - Clean Architecture and DDD principles.
+- [Domain Model](docs/domain.md) - Bounded contexts and entities.
+- [Development Guide](docs/development.md) - How to add new tools and maintain the server.
 
 ### Related Project
 
