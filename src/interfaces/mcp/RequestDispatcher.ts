@@ -128,6 +128,6 @@ export class RequestDispatcher {
     if (userMethods.includes(method)) return this.userController.handle(method, params);
     if (mediaMethods.includes(method)) return this.mediaController.handle(method, params);
     
-    return null; 
+    throw new Error(`Unknown method: ${method}`);
   }
 }
