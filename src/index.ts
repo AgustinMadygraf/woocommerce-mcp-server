@@ -1,25 +1,14 @@
 #!/usr/bin/env node
 import axios from "axios";
 import { createInterface } from "readline";
-import { WooMetaData } from "./types";
+import { WooMetaData } from "./core/types/woo.types";
+import { config } from "./infrastructure/config/env";
 
-interface JsonRpcRequest {
-  jsonrpc: "2.0";
-  id: string | number;
-  method: string;
-  params?: any;
-}
+import { WooCommerceClient } from "./infrastructure/api/WooCommerceClient";
+import { WordPressClient } from "./infrastructure/api/WordPressClient";
+import { RequestDispatcher } from "./interfaces/mcp/RequestDispatcher";
 
-interface JsonRpcResponse {
-  jsonrpc: "2.0";
-  id: string | number;
-  result?: any;
-  error?: {
-    code: number;
-    message: string;
-    data?: any;
-  };
-}
+import { JsonRpcRequest, JsonRpcResponse } from "./interfaces/mcp/JsonRpc";
 
 interface WordPressError {
   message: string;
@@ -43,11 +32,11 @@ const isAxiosError = (error: unknown): error is AxiosError => {
 };
 
 // Get WordPress credentials from environment variables
-const DEFAULT_SITE_URL = process.env.WORDPRESS_SITE_URL || "";
-const DEFAULT_USERNAME = process.env.WORDPRESS_USERNAME || "";
-const DEFAULT_PASSWORD = process.env.WORDPRESS_PASSWORD || "";
-const DEFAULT_CONSUMER_KEY = process.env.WOOCOMMERCE_CONSUMER_KEY || "";
-const DEFAULT_CONSUMER_SECRET = process.env.WOOCOMMERCE_CONSUMER_SECRET || "";
+const DEFAULT_SITE_URL = config.wordpress.siteUrl;
+
+const wooClient = new WooCommerceClient();
+const wpClient = new WordPressClient();
+const dispatcher = new RequestDispatcher(wooClient, wpClient);
 
 async function handleWooCommerceRequest(
   method: string,
@@ -211,6 +200,13 @@ async function handleWooCommerceRequest(
       "delete_customer_meta",
     ];
 
+    // Try to dispatch using the new architecture
+    const dispatchedResult = await dispatcher.dispatch(method, params);
+    if (dispatchedResult !== null) {
+      return dispatchedResult;
+    }
+
+    // Fallback to legacy switch for non-migrated methods
     // Create WordPress REST API client
     let client;
 
