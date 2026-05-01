@@ -1,5 +1,8 @@
 import { WooCommerceClient } from "../../../infrastructure/api/WooCommerceClient";
+import { WordPressClient } from "../../../infrastructure/api/WordPressClient";
 import { GetPaymentGatewaysUseCase } from "../../../application/use-cases/system/GetPaymentGateways";
+import { GetPluginsUseCase } from "../../../application/use-cases/system/GetPlugins";
+import { GetThemesUseCase } from "../../../application/use-cases/system/GetThemes";
 import { GetPaymentGatewayUseCase } from "../../../application/use-cases/system/GetPaymentGateway";
 import { UpdatePaymentGatewayUseCase } from "../../../application/use-cases/system/UpdatePaymentGateway";
 import { GetSettingsGroupsUseCase } from "../../../application/use-cases/system/GetSettingsGroups";
@@ -14,8 +17,12 @@ import { GetCountriesUseCase } from "../../../application/use-cases/system/GetCo
 import { GetCurrenciesUseCase } from "../../../application/use-cases/system/GetCurrencies";
 import { GetCurrentCurrencyUseCase } from "../../../application/use-cases/system/GetCurrentCurrency";
 import { GetDataIndexUseCase } from "../../../application/use-cases/system/GetDataIndex";
+import { GetSettingOptionUseCase } from "../../../application/use-cases/system/GetSettingOption";
 import { GetWebhooksUseCase } from "../../../application/use-cases/system/GetWebhooks";
 import { GetWebhookUseCase } from "../../../application/use-cases/system/GetWebhook";
+import { CreateWebhookUseCase } from "../../../application/use-cases/system/CreateWebhook";
+import { UpdateWebhookUseCase } from "../../../application/use-cases/system/UpdateWebhook";
+import { DeleteWebhookUseCase } from "../../../application/use-cases/system/DeleteWebhook";
 
 export class SystemController {
   private getPaymentGatewaysUseCase: GetPaymentGatewaysUseCase;
@@ -35,9 +42,17 @@ export class SystemController {
   private getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase;
   private getWebhooksUseCase: GetWebhooksUseCase;
   private getWebhookUseCase: GetWebhookUseCase;
+  private createWebhookUseCase: CreateWebhookUseCase;
+  private updateWebhookUseCase: UpdateWebhookUseCase;
+  private deleteWebhookUseCase: DeleteWebhookUseCase;
+  private getSettingOptionUseCase: GetSettingOptionUseCase;
+  private getPluginsUseCase: GetPluginsUseCase;
+  private getThemesUseCase: GetThemesUseCase;
 
-  constructor(client: WooCommerceClient) {
+  constructor(client: WooCommerceClient, wpClient: WordPressClient) {
     this.getPaymentGatewaysUseCase = new GetPaymentGatewaysUseCase(client);
+    this.getPluginsUseCase = new GetPluginsUseCase(wpClient);
+    this.getThemesUseCase = new GetThemesUseCase(wpClient);
     this.getPaymentGatewayUseCase = new GetPaymentGatewayUseCase(client);
     this.updatePaymentGatewayUseCase = new UpdatePaymentGatewayUseCase(client);
     this.getSettingsGroupsUseCase = new GetSettingsGroupsUseCase(client);
@@ -54,6 +69,10 @@ export class SystemController {
     this.getCurrentCurrencyUseCase = new GetCurrentCurrencyUseCase(client);
     this.getWebhooksUseCase = new GetWebhooksUseCase(client);
     this.getWebhookUseCase = new GetWebhookUseCase(client);
+    this.createWebhookUseCase = new CreateWebhookUseCase(client);
+    this.updateWebhookUseCase = new UpdateWebhookUseCase(client);
+    this.deleteWebhookUseCase = new DeleteWebhookUseCase(client);
+    this.getSettingOptionUseCase = new GetSettingOptionUseCase(client);
   }
 
   async handle(method: string, params: any) {
@@ -68,6 +87,8 @@ export class SystemController {
         return this.getSettingsGroupsUseCase.execute();
       case "get_setting_options":
         return this.getSettingsGroupUseCase.execute(params);
+      case "get_setting_option":
+        return this.getSettingOptionUseCase.execute(params);
       case "update_settings_option":
         return this.updateSettingsOptionUseCase.execute(params);
       case "get_system_status":
@@ -88,10 +109,20 @@ export class SystemController {
         return this.getCurrenciesUseCase.execute();
       case "get_current_currency":
         return this.getCurrentCurrencyUseCase.execute();
+      case "get_plugins":
+        return this.getPluginsUseCase.execute();
+      case "get_themes":
+        return this.getThemesUseCase.execute();
       case "get_webhooks":
         return this.getWebhooksUseCase.execute(params);
       case "get_webhook":
         return this.getWebhookUseCase.execute(params.webhookId);
+      case "create_webhook":
+        return this.createWebhookUseCase.execute(params.webhookData);
+      case "update_webhook":
+        return this.updateWebhookUseCase.execute(params.webhookId, params.webhookData);
+      case "delete_webhook":
+        return this.deleteWebhookUseCase.execute(params.webhookId, params.force);
       default:
         throw new Error(`Method ${method} not handled by SystemController`);
     }

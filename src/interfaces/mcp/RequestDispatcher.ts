@@ -10,6 +10,8 @@ import { TaxController } from "./controllers/TaxController";
 import { ShippingController } from "./controllers/ShippingController";
 import { MetaController } from "./controllers/MetaController";
 import { SystemController } from "./controllers/SystemController";
+import { UserController } from "./controllers/UserController";
+import { MediaController } from "./controllers/MediaController";
 
 export class RequestDispatcher {
   private productController: ProductController;
@@ -22,6 +24,8 @@ export class RequestDispatcher {
   private shippingController: ShippingController;
   private metaController: MetaController;
   private systemController: SystemController;
+  private userController: UserController;
+  private mediaController: MediaController;
 
   constructor(wooClient: WooCommerceClient, wpClient: WordPressClient) {
     this.productController = new ProductController(wooClient);
@@ -33,7 +37,9 @@ export class RequestDispatcher {
     this.taxController = new TaxController(wooClient);
     this.shippingController = new ShippingController(wooClient);
     this.metaController = new MetaController(wooClient);
-    this.systemController = new SystemController(wooClient);
+    this.systemController = new SystemController(wooClient, wpClient);
+    this.userController = new UserController(wpClient);
+    this.mediaController = new MediaController(wpClient);
   }
 
   async dispatch(method: string, params: any) {
@@ -44,14 +50,15 @@ export class RequestDispatcher {
       "get_attribute_terms", "get_attribute_term", "create_attribute_term", "update_attribute_term", "delete_attribute_term",
       "get_product_categories", "get_product_category", "create_product_category", "update_product_category", "delete_product_category",
       "get_product_tags", "get_product_tag", "create_product_tag", "update_product_tag", "delete_product_tag",
-      "get_product_reviews", "get_product_review", "create_product_review", "update_product_review", "delete_product_review"
+      "get_product_reviews", "get_product_review", "create_product_review", "update_product_review", "delete_product_review",
+      "batch_products"
     ];
 
     const orderMethods = [
       "get_orders", "get_order", "create_order", "update_order", "delete_order",
       "get_order_notes", "get_order_note", "create_order_note", "delete_order_note",
       "get_order_refunds", "get_order_refund", "create_order_refund", "delete_order_refund",
-      "get_order_statuses"
+      "get_order_statuses", "batch_orders"
     ];
 
     const customerMethods = [
@@ -60,13 +67,14 @@ export class RequestDispatcher {
     ];
 
     const reportMethods = [
-      "get_sales_report", "get_products_report", "get_orders_report", 
+      "get_sales_report", "get_top_sellers_report", "get_products_report", "get_orders_report", 
       "get_categories_report", "get_customers_report", "get_stock_report", 
-      "get_coupons_report", "get_taxes_report"
+      "get_coupons_report", "get_taxes_report",
+      "get_orders_totals_report", "get_products_totals_report", "get_customers_totals_report", "get_coupons_totals_report"
     ];
 
     const postMethods = [
-      "get_posts", "create_post", "update_post",
+      "get_posts", "get_post", "create_post", "update_post", "delete_post",
       "get_post_meta", "create_post_meta", "update_post_meta", "delete_post_meta"
     ];
 
@@ -92,10 +100,19 @@ export class RequestDispatcher {
 
     const systemMethods = [
       "get_payment_gateways", "get_payment_gateway", "update_payment_gateway",
-      "get_settings", "get_setting_options", "update_settings_option",
+      "get_settings", "get_setting_options", "get_setting_option", "update_settings_option",
       "get_system_status", "get_system_status_tools", "run_system_status_tool",
       "get_data", "get_data_index", "get_continents", "get_countries", "get_currencies", "get_current_currency",
-      "get_webhooks", "get_webhook"
+      "get_webhooks", "get_webhook", "create_webhook", "update_webhook", "delete_webhook",
+      "get_plugins", "get_themes"
+    ];
+
+    const userMethods = [
+      "get_users", "get_user", "create_user", "update_user", "delete_user"
+    ];
+
+    const mediaMethods = [
+      "get_media", "get_medium"
     ];
 
     if (productMethods.includes(method)) return this.productController.handle(method, params);
@@ -108,6 +125,8 @@ export class RequestDispatcher {
     if (shippingMethods.includes(method)) return this.shippingController.handle(method, params);
     if (metaMethods.includes(method)) return this.metaController.handle(method, params);
     if (systemMethods.includes(method)) return this.systemController.handle(method, params);
+    if (userMethods.includes(method)) return this.userController.handle(method, params);
+    if (mediaMethods.includes(method)) return this.mediaController.handle(method, params);
     
     return null; 
   }

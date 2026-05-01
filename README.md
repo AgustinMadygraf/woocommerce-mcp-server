@@ -82,13 +82,32 @@ These methods require WordPress username/password credentials and are independen
 
 | Method | Description |
 |--------|-------------|
-| `create_post` | Create a new WordPress post |
 | `get_posts` | Retrieve WordPress posts |
+| `get_post` | Retrieve a single WordPress post |
+| `create_post` | Create a new WordPress post |
 | `update_post` | Update an existing WordPress post |
+| `delete_post` | Delete a WordPress post |
 | `get_post_meta` | Get post metadata |
 | `update_post_meta` | Update post metadata |
 | `create_post_meta` | Create post metadata |
 | `delete_post_meta` | Delete post metadata |
+
+### WordPress Users
+
+| Method | Description |
+|--------|-------------|
+| `get_users` | Retrieve WordPress users |
+| `get_user` | Retrieve a single user |
+| `create_user` | Create a new WordPress user |
+| `update_user` | Update an existing user |
+| `delete_user` | Delete a WordPress user |
+
+### WordPress Media
+
+| Method | Description |
+|--------|-------------|
+| `get_media` | Retrieve WordPress media library |
+| `get_medium` | Retrieve a single media item |
 
 ### WooCommerce Products
 
@@ -99,6 +118,7 @@ These methods require WordPress username/password credentials and are independen
 | `create_product` | Create a new product |
 | `update_product` | Update an existing product |
 | `delete_product` | Delete a product |
+| `batch_products` | Create/Update/Delete products in batch |
 | `get_product_meta` | Get product metadata |
 | `create_product_meta` | Create/update product metadata |
 | `update_product_meta` | Update product metadata (alias for create) |
@@ -168,6 +188,7 @@ These methods require WordPress username/password credentials and are independen
 | `create_order` | Create a new order |
 | `update_order` | Update an existing order |
 | `delete_order` | Delete an order |
+| `batch_orders` | Create/Update/Delete orders in batch |
 | `get_order_meta` | Get order metadata |
 | `create_order_meta` | Create/update order metadata |
 | `update_order_meta` | Update order metadata (alias for create) |
@@ -261,22 +282,30 @@ These methods require WordPress username/password credentials and are independen
 
 | Method | Description |
 |--------|-------------|
-| `get_sales_report` | Retrieve sales reports |
-| `get_products_report` | Retrieve products reports |
-| `get_orders_report` | Retrieve orders reports |
-| `get_categories_report` | Retrieve categories reports |
-| `get_customers_report` | Retrieve customers reports |
-| `get_stock_report` | Retrieve stock reports |
-| `get_coupons_report` | Retrieve coupons reports |
-| `get_taxes_report` | Retrieve taxes reports |
+| `get_sales_report` | Get sales report |
+| `get_top_sellers_report` | Get top sellers report |
+| `get_products_report` | Get products report |
+| `get_orders_report` | Get orders report |
+| `get_orders_totals_report` | Get order totals report |
+| `get_products_totals_report` | Get product totals report |
+| `get_customers_totals_report` | Get customer totals report |
+| `get_coupons_totals_report` | Get coupon totals report |
+| `get_categories_report` | Get categories report |
+| `get_customers_report` | Get customers report |
+| `get_stock_report` | Get stock report |
+| `get_coupons_report` | Get coupons report |
+| `get_taxes_report` | Get taxes report |
 
 ### Settings
 
 | Method | Description |
 |--------|-------------|
 | `get_settings` | Retrieve all settings |
-| `get_setting_options` | Retrieve options for a setting |
+| `get_setting_options` | Retrieve options for a setting group |
+| `get_setting_option` | Retrieve a single setting option |
 | `update_settings_option` | Update a setting option |
+| `get_plugins` | Retrieve list of active plugins |
+| `get_themes` | Retrieve list of installed themes |
 
 ### System Status
 
@@ -292,6 +321,9 @@ These methods require WordPress username/password credentials and are independen
 |--------|-------------|
 | `get_webhooks` | Retrieve webhooks |
 | `get_webhook` | Get a single webhook |
+| `create_webhook` | Create a new webhook |
+| `update_webhook` | Update an existing webhook |
+| `delete_webhook` | Delete a webhook |
 
 ### Data
 

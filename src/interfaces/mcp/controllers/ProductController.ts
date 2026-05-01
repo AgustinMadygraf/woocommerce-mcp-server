@@ -4,6 +4,7 @@ import { GetProductUseCase } from "../../../application/use-cases/products/GetPr
 import { CreateProductUseCase } from "../../../application/use-cases/products/CreateProduct";
 import { UpdateProductUseCase } from "../../../application/use-cases/products/UpdateProduct";
 import { DeleteProductUseCase } from "../../../application/use-cases/products/DeleteProduct";
+import { BatchProductsUseCase } from "../../../application/use-cases/products/BatchProducts";
 import { GetProductVariationsUseCase } from "../../../application/use-cases/products/variations/GetProductVariations";
 import { GetProductVariationUseCase } from "../../../application/use-cases/products/variations/GetProductVariation";
 import { CreateProductVariationUseCase } from "../../../application/use-cases/products/variations/CreateProductVariation";
@@ -41,6 +42,7 @@ export class ProductController {
   private createProductUseCase: CreateProductUseCase;
   private updateProductUseCase: UpdateProductUseCase;
   private deleteProductUseCase: DeleteProductUseCase;
+  private batchProductsUseCase: BatchProductsUseCase;
   private getProductVariationsUseCase: GetProductVariationsUseCase;
   private getProductVariationUseCase: GetProductVariationUseCase;
   private createProductVariationUseCase: CreateProductVariationUseCase;
@@ -78,6 +80,7 @@ export class ProductController {
     this.createProductUseCase = new CreateProductUseCase(client);
     this.updateProductUseCase = new UpdateProductUseCase(client);
     this.deleteProductUseCase = new DeleteProductUseCase(client);
+    this.batchProductsUseCase = new BatchProductsUseCase(client);
     this.getProductVariationsUseCase = new GetProductVariationsUseCase(client);
     this.getProductVariationUseCase = new GetProductVariationUseCase(client);
     this.createProductVariationUseCase = new CreateProductVariationUseCase(client);
@@ -122,6 +125,8 @@ export class ProductController {
         return this.updateProductUseCase.execute(params.productId, params.productData);
       case "delete_product":
         return this.deleteProductUseCase.execute(params.productId, params.force);
+      case "batch_products":
+        return this.batchProductsUseCase.execute(params.batchData);
       
       // Variations
       case "get_product_variations":

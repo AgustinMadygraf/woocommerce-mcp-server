@@ -4,6 +4,7 @@ import { GetOrderUseCase } from "../../../application/use-cases/orders/GetOrder"
 import { CreateOrderUseCase } from "../../../application/use-cases/orders/CreateOrder";
 import { UpdateOrderUseCase } from "../../../application/use-cases/orders/UpdateOrder";
 import { DeleteOrderUseCase } from "../../../application/use-cases/orders/DeleteOrder";
+import { BatchOrdersUseCase } from "../../../application/use-cases/orders/BatchOrders";
 import { GetOrderNotesUseCase } from "../../../application/use-cases/orders/notes/GetOrderNotes";
 import { GetOrderNoteUseCase } from "../../../application/use-cases/orders/notes/GetOrderNote";
 import { CreateOrderNoteUseCase } from "../../../application/use-cases/orders/notes/CreateOrderNote";
@@ -20,6 +21,7 @@ export class OrderController {
   private createOrderUseCase: CreateOrderUseCase;
   private updateOrderUseCase: UpdateOrderUseCase;
   private deleteOrderUseCase: DeleteOrderUseCase;
+  private batchOrdersUseCase: BatchOrdersUseCase;
   private getOrderStatusesUseCase: GetOrderStatusesUseCase;
   private getOrderNotesUseCase: GetOrderNotesUseCase;
   private getOrderNoteUseCase: GetOrderNoteUseCase;
@@ -36,6 +38,7 @@ export class OrderController {
     this.createOrderUseCase = new CreateOrderUseCase(client);
     this.updateOrderUseCase = new UpdateOrderUseCase(client);
     this.deleteOrderUseCase = new DeleteOrderUseCase(client);
+    this.batchOrdersUseCase = new BatchOrdersUseCase(client);
     this.getOrderNotesUseCase = new GetOrderNotesUseCase(client);
     this.getOrderNoteUseCase = new GetOrderNoteUseCase(client);
     this.createOrderNoteUseCase = new CreateOrderNoteUseCase(client);
@@ -59,6 +62,8 @@ export class OrderController {
         return this.updateOrderUseCase.execute(params.orderId, params.orderData);
       case "delete_order":
         return this.deleteOrderUseCase.execute(params.orderId, params.force);
+      case "batch_orders":
+        return this.batchOrdersUseCase.execute(params.batchData);
       case "get_order_statuses":
         return this.getOrderStatusesUseCase.execute();
       

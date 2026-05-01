@@ -9,10 +9,15 @@ export class ReportController {
   }
 
   async handle(method: string, params: any) {
-    const reportType = method.replace("get_", "").replace("_report", "");
+    let reportType = method.replace("get_", "").replace("_report", "");
+    
+    // Map specific report types to sub-paths if needed
+    if (reportType.endsWith("_totals")) {
+      reportType = reportType.replace("_totals", "/totals");
+    }
     
     const useCaseParams: GetReportParams = {
-      type: reportType === "sales" ? "sales" : reportType, // 'sales' report is special in path but here it works
+      type: reportType,
       period: params.period,
       dateMin: params.dateMin,
       dateMax: params.dateMax,

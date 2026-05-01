@@ -44,11 +44,17 @@ async function handleMcpRequest(method: string, params: any): Promise<any> {
     // List all tools supported by the dispatcher
     const tools = [
       // WordPress Posts
-      "get_posts", "create_post", "update_post",
+      "get_posts", "get_post", "create_post", "update_post", "delete_post",
       "get_post_meta", "create_post_meta", "update_post_meta", "delete_post_meta",
       
+      // WordPress Users
+      "get_users", "get_user", "create_user", "update_user", "delete_user",
+      
+      // WordPress Media
+      "get_media", "get_medium",
+      
       // WooCommerce Products
-      "get_products", "get_product", "create_product", "update_product", "delete_product",
+      "get_products", "get_product", "create_product", "update_product", "delete_product", "batch_products",
       "get_product_variations", "get_product_variation", "create_product_variation", "update_product_variation", "delete_product_variation",
       "get_product_attributes", "get_product_attribute", "create_product_attribute", "update_product_attribute", "delete_product_attribute",
       "get_attribute_terms", "get_attribute_term", "create_attribute_term", "update_attribute_term", "delete_attribute_term",
@@ -60,7 +66,7 @@ async function handleMcpRequest(method: string, params: any): Promise<any> {
       "get_orders", "get_order", "create_order", "update_order", "delete_order",
       "get_order_notes", "get_order_note", "create_order_note", "delete_order_note",
       "get_order_refunds", "get_order_refund", "create_order_refund", "delete_order_refund",
-      "get_order_statuses",
+      "get_order_statuses", "batch_orders",
       
       // WooCommerce Customers
       "get_customers", "get_customer", "create_customer", "update_customer", "delete_customer", "get_customer_downloads",
@@ -78,7 +84,8 @@ async function handleMcpRequest(method: string, params: any): Promise<any> {
       "get_shipping_zone_locations", "update_shipping_zone_locations", "get_shipping_classes", "get_shipping_class",
       
       // WooCommerce Reports
-      "get_sales_report", "get_products_report", "get_orders_report", "get_categories_report", "get_customers_report", "get_stock_report", "get_coupons_report", "get_taxes_report",
+      "get_sales_report", "get_top_sellers_report", "get_products_report", "get_orders_report", "get_categories_report", "get_customers_report", "get_stock_report", "get_coupons_report", "get_taxes_report",
+      "get_orders_totals_report", "get_products_totals_report", "get_customers_totals_report", "get_coupons_totals_report",
       
       // Meta Data (Direct access)
       "get_product_meta", "update_product_meta", "create_product_meta", "delete_product_meta",
@@ -87,10 +94,11 @@ async function handleMcpRequest(method: string, params: any): Promise<any> {
       
       // System & Settings
       "get_payment_gateways", "get_payment_gateway", "update_payment_gateway",
-      "get_settings", "get_setting_options", "update_settings_option",
+      "get_settings", "get_setting_options", "get_setting_option", "update_settings_option",
       "get_system_status", "get_system_status_tools", "run_system_status_tool",
       "get_data", "get_data_index", "get_continents", "get_countries", "get_currencies", "get_current_currency",
-      "get_webhooks", "get_webhook"
+      "get_webhooks", "get_webhook", "create_webhook", "update_webhook", "delete_webhook",
+      "get_plugins", "get_themes"
     ];
 
     return {
