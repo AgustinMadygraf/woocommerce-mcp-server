@@ -12,6 +12,7 @@ import { GetOrderRefundsUseCase } from "../../../application/use-cases/orders/re
 import { GetOrderRefundUseCase } from "../../../application/use-cases/orders/refunds/GetOrderRefund";
 import { CreateOrderRefundUseCase } from "../../../application/use-cases/orders/refunds/CreateOrderRefund";
 import { DeleteOrderRefundUseCase } from "../../../application/use-cases/orders/refunds/DeleteOrderRefund";
+import { GetOrderStatusesUseCase } from "../../../application/use-cases/orders/GetOrderStatuses";
 
 export class OrderController {
   private getOrdersUseCase: GetOrdersUseCase;
@@ -19,6 +20,7 @@ export class OrderController {
   private createOrderUseCase: CreateOrderUseCase;
   private updateOrderUseCase: UpdateOrderUseCase;
   private deleteOrderUseCase: DeleteOrderUseCase;
+  private getOrderStatusesUseCase: GetOrderStatusesUseCase;
   private getOrderNotesUseCase: GetOrderNotesUseCase;
   private getOrderNoteUseCase: GetOrderNoteUseCase;
   private createOrderNoteUseCase: CreateOrderNoteUseCase;
@@ -42,6 +44,7 @@ export class OrderController {
     this.getOrderRefundUseCase = new GetOrderRefundUseCase(client);
     this.createOrderRefundUseCase = new CreateOrderRefundUseCase(client);
     this.deleteOrderRefundUseCase = new DeleteOrderRefundUseCase(client);
+    this.getOrderStatusesUseCase = new GetOrderStatusesUseCase(client);
   }
 
   async handle(method: string, params: any) {
@@ -56,6 +59,8 @@ export class OrderController {
         return this.updateOrderUseCase.execute(params.orderId, params.orderData);
       case "delete_order":
         return this.deleteOrderUseCase.execute(params.orderId, params.force);
+      case "get_order_statuses":
+        return this.getOrderStatusesUseCase.execute();
       
       // Notes
       case "get_order_notes":

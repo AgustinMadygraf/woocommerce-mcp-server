@@ -172,6 +172,7 @@ These methods require WordPress username/password credentials and are independen
 | `create_order_meta` | Create/update order metadata |
 | `update_order_meta` | Update order metadata (alias for create) |
 | `delete_order_meta` | Delete order metadata |
+| `get_order_statuses` | Retrieve order statuses |
 
 ### Order Notes
 
@@ -204,6 +205,7 @@ These methods require WordPress username/password credentials and are independen
 | `create_customer_meta` | Create/update customer metadata |
 | `update_customer_meta` | Update customer metadata (alias for create) |
 | `delete_customer_meta` | Delete customer metadata |
+| `get_customer_downloads` | Retrieve customer downloads |
 
 ### Shipping
 
@@ -221,6 +223,8 @@ These methods require WordPress username/password credentials and are independen
 | `delete_shipping_zone_method` | Delete a shipping method from a zone |
 | `get_shipping_zone_locations` | Get locations for a shipping zone |
 | `update_shipping_zone_locations` | Update locations for a shipping zone |
+| `get_shipping_classes` | Retrieve shipping classes |
+| `get_shipping_class` | Retrieve a single shipping class |
 
 ### Taxes
 
@@ -272,7 +276,7 @@ These methods require WordPress username/password credentials and are independen
 |--------|-------------|
 | `get_settings` | Retrieve all settings |
 | `get_setting_options` | Retrieve options for a setting |
-| `update_setting_option` | Update a setting option |
+| `update_settings_option` | Update a setting option |
 
 ### System Status
 
@@ -282,11 +286,19 @@ These methods require WordPress username/password credentials and are independen
 | `get_system_status_tools` | Retrieve system status tools |
 | `run_system_status_tool` | Run a system status tool |
 
+### Webhooks
+
+| Method | Description |
+|--------|-------------|
+| `get_webhooks` | Retrieve webhooks |
+| `get_webhook` | Get a single webhook |
+
 ### Data
 
 | Method | Description |
 |--------|-------------|
 | `get_data` | Retrieve store data |
+| `get_data_index` | Retrieve data index |
 | `get_continents` | Retrieve continents data |
 | `get_countries` | Retrieve countries data |
 | `get_currencies` | Retrieve currencies data |

@@ -4,6 +4,7 @@ import { GetCustomerUseCase } from "../../../application/use-cases/customers/Get
 import { CreateCustomerUseCase } from "../../../application/use-cases/customers/CreateCustomer";
 import { UpdateCustomerUseCase } from "../../../application/use-cases/customers/UpdateCustomer";
 import { DeleteCustomerUseCase } from "../../../application/use-cases/customers/DeleteCustomer";
+import { GetCustomerDownloadsUseCase } from "../../../application/use-cases/customers/GetCustomerDownloads";
 
 export class CustomerController {
   private getCustomersUseCase: GetCustomersUseCase;
@@ -11,6 +12,7 @@ export class CustomerController {
   private createCustomerUseCase: CreateCustomerUseCase;
   private updateCustomerUseCase: UpdateCustomerUseCase;
   private deleteCustomerUseCase: DeleteCustomerUseCase;
+  private getCustomerDownloadsUseCase: GetCustomerDownloadsUseCase;
 
   constructor(private client: WooCommerceClient) {
     this.getCustomersUseCase = new GetCustomersUseCase(client);
@@ -18,6 +20,7 @@ export class CustomerController {
     this.createCustomerUseCase = new CreateCustomerUseCase(client);
     this.updateCustomerUseCase = new UpdateCustomerUseCase(client);
     this.deleteCustomerUseCase = new DeleteCustomerUseCase(client);
+    this.getCustomerDownloadsUseCase = new GetCustomerDownloadsUseCase(client);
   }
 
   async handle(method: string, params: any) {
@@ -32,6 +35,8 @@ export class CustomerController {
         return this.updateCustomerUseCase.execute(params.customerId, params.customerData);
       case "delete_customer":
         return this.deleteCustomerUseCase.execute(params.customerId, params.force);
+      case "get_customer_downloads":
+        return this.getCustomerDownloadsUseCase.execute(params.customerId);
       default:
         throw new Error(`Method ${method} not handled by CustomerController`);
     }

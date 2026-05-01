@@ -11,6 +11,8 @@ import { UpdateShippingZoneMethodUseCase } from "../../../application/use-cases/
 import { DeleteShippingZoneMethodUseCase } from "../../../application/use-cases/shipping/DeleteShippingZoneMethod";
 import { GetShippingZoneLocationsUseCase } from "../../../application/use-cases/shipping/GetShippingZoneLocations";
 import { UpdateShippingZoneLocationsUseCase } from "../../../application/use-cases/shipping/UpdateShippingZoneLocations";
+import { GetShippingClassesUseCase } from "../../../application/use-cases/shipping/GetShippingClasses";
+import { GetShippingClassUseCase } from "../../../application/use-cases/shipping/GetShippingClass";
 
 export class ShippingController {
   private getShippingZonesUseCase: GetShippingZonesUseCase;
@@ -25,6 +27,8 @@ export class ShippingController {
   private deleteShippingZoneMethodUseCase: DeleteShippingZoneMethodUseCase;
   private getShippingZoneLocationsUseCase: GetShippingZoneLocationsUseCase;
   private updateShippingZoneLocationsUseCase: UpdateShippingZoneLocationsUseCase;
+  private getShippingClassesUseCase: GetShippingClassesUseCase;
+  private getShippingClassUseCase: GetShippingClassUseCase;
 
   constructor(client: WooCommerceClient) {
     this.getShippingZonesUseCase = new GetShippingZonesUseCase(client);
@@ -39,6 +43,8 @@ export class ShippingController {
     this.deleteShippingZoneMethodUseCase = new DeleteShippingZoneMethodUseCase(client);
     this.getShippingZoneLocationsUseCase = new GetShippingZoneLocationsUseCase(client);
     this.updateShippingZoneLocationsUseCase = new UpdateShippingZoneLocationsUseCase(client);
+    this.getShippingClassesUseCase = new GetShippingClassesUseCase(client);
+    this.getShippingClassUseCase = new GetShippingClassUseCase(client);
   }
 
   async handle(method: string, params: any) {
@@ -67,6 +73,10 @@ export class ShippingController {
         return this.getShippingZoneLocationsUseCase.execute(params);
       case "update_shipping_zone_locations":
         return this.updateShippingZoneLocationsUseCase.execute(params);
+      case "get_shipping_classes":
+        return this.getShippingClassesUseCase.execute();
+      case "get_shipping_class":
+        return this.getShippingClassUseCase.execute(params.classId);
       default:
         throw new Error(`Method ${method} not handled by ShippingController`);
     }

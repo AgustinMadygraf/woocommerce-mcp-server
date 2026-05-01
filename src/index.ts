@@ -60,9 +60,10 @@ async function handleMcpRequest(method: string, params: any): Promise<any> {
       "get_orders", "get_order", "create_order", "update_order", "delete_order",
       "get_order_notes", "get_order_note", "create_order_note", "delete_order_note",
       "get_order_refunds", "get_order_refund", "create_order_refund", "delete_order_refund",
+      "get_order_statuses",
       
       // WooCommerce Customers
-      "get_customers", "get_customer", "create_customer", "update_customer", "delete_customer",
+      "get_customers", "get_customer", "create_customer", "update_customer", "delete_customer", "get_customer_downloads",
       
       // WooCommerce Coupons
       "get_coupons", "get_coupon", "create_coupon", "update_coupon", "delete_coupon",
@@ -74,7 +75,7 @@ async function handleMcpRequest(method: string, params: any): Promise<any> {
       // WooCommerce Shipping
       "get_shipping_zones", "get_shipping_zone", "create_shipping_zone", "update_shipping_zone", "delete_shipping_zone",
       "get_shipping_methods", "get_shipping_zone_methods", "create_shipping_zone_method", "update_shipping_zone_method", "delete_shipping_zone_method",
-      "get_shipping_zone_locations", "update_shipping_zone_locations",
+      "get_shipping_zone_locations", "update_shipping_zone_locations", "get_shipping_classes", "get_shipping_class",
       
       // WooCommerce Reports
       "get_sales_report", "get_products_report", "get_orders_report", "get_categories_report", "get_customers_report", "get_stock_report", "get_coupons_report", "get_taxes_report",
@@ -88,7 +89,8 @@ async function handleMcpRequest(method: string, params: any): Promise<any> {
       "get_payment_gateways", "get_payment_gateway", "update_payment_gateway",
       "get_settings", "get_setting_options", "update_settings_option",
       "get_system_status", "get_system_status_tools", "run_system_status_tool",
-      "get_data", "get_data_index", "get_continents", "get_countries", "get_currencies", "get_current_currency"
+      "get_data", "get_data_index", "get_continents", "get_countries", "get_currencies", "get_current_currency",
+      "get_webhooks", "get_webhook"
     ];
 
     return {

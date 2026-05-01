@@ -14,6 +14,8 @@ import { GetCountriesUseCase } from "../../../application/use-cases/system/GetCo
 import { GetCurrenciesUseCase } from "../../../application/use-cases/system/GetCurrencies";
 import { GetCurrentCurrencyUseCase } from "../../../application/use-cases/system/GetCurrentCurrency";
 import { GetDataIndexUseCase } from "../../../application/use-cases/system/GetDataIndex";
+import { GetWebhooksUseCase } from "../../../application/use-cases/system/GetWebhooks";
+import { GetWebhookUseCase } from "../../../application/use-cases/system/GetWebhook";
 
 export class SystemController {
   private getPaymentGatewaysUseCase: GetPaymentGatewaysUseCase;
@@ -31,6 +33,8 @@ export class SystemController {
   private getCountriesUseCase: GetCountriesUseCase;
   private getCurrenciesUseCase: GetCurrenciesUseCase;
   private getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase;
+  private getWebhooksUseCase: GetWebhooksUseCase;
+  private getWebhookUseCase: GetWebhookUseCase;
 
   constructor(client: WooCommerceClient) {
     this.getPaymentGatewaysUseCase = new GetPaymentGatewaysUseCase(client);
@@ -48,6 +52,8 @@ export class SystemController {
     this.getCountriesUseCase = new GetCountriesUseCase(client);
     this.getCurrenciesUseCase = new GetCurrenciesUseCase(client);
     this.getCurrentCurrencyUseCase = new GetCurrentCurrencyUseCase(client);
+    this.getWebhooksUseCase = new GetWebhooksUseCase(client);
+    this.getWebhookUseCase = new GetWebhookUseCase(client);
   }
 
   async handle(method: string, params: any) {
@@ -82,6 +88,10 @@ export class SystemController {
         return this.getCurrenciesUseCase.execute();
       case "get_current_currency":
         return this.getCurrentCurrencyUseCase.execute();
+      case "get_webhooks":
+        return this.getWebhooksUseCase.execute(params);
+      case "get_webhook":
+        return this.getWebhookUseCase.execute(params.webhookId);
       default:
         throw new Error(`Method ${method} not handled by SystemController`);
     }
