@@ -1,20 +1,19 @@
-# TODO - WooCommerce MCP Server
+# TODO - WooCommerce MCP Server (Virtual CEO Edition)
 
-## Prioridad Alta (Inmediata)
-- [x] **Infraestructura de Tests**: Configurar `vitest` y crear `tests/tools.test.ts` (Paridad con Xubio).
-- [x] **Corrección de Documentación**: Sincronizar `README.md` con `src/index.ts`.
-- [x] **Endpoints GET Core Faltantes**: `get_order_statuses`, `get_shipping_classes`, `get_customer_downloads`, `get_webhooks`.
+## Fase 1: Poda Técnica y Consolidación (En Curso)
+- [ ] **Desactivación de Herramientas**: Eliminar o comentar las 124 herramientas no esenciales del `tools/list` en `src/index.ts`.
+- [ ] **Limpieza de Controladores**: Remover la lógica de los controladores que ya no se expondrán para reducir la superficie de ataque y complejidad.
+- [ ] **Validación de Endpoints Core**: Asegurar que las 12 herramientas seleccionadas para el CEO Virtual funcionan correctamente y devuelven el `email` para interoperabilidad.
 
-## Prioridad Media
-- [x] **Gestión de Webhooks (Escritura)**: `create_webhook`, `update_webhook`, `delete_webhook`.
-- [x] **Mejora de Reportes**: Soporte para reportes de totales y filtros avanzados (Top Sellers, Orders Totals, etc).
-- [x] **Batch Operations**: Implementación de endpoints `/batch` para productos y pedidos.
+## Fase 2: Seguridad y Operación Estratégica
+- [ ] **Confirmación de Batch**: Implementar lógica en el cliente o agente para requerir confirmación humana en `batch_products` cuando afecte >10% del catálogo.
+- [ ] **Mejora de Reportes**: Verificar si los reportes actuales cubren los KPIs necesarios o si se requiere agregación manual en el servidor.
+- [ ] **Log de Auditoría**: Investigar e implementar un sistema ligero de logging para acciones críticas tomadas por la IA.
 
-## Prioridad Baja
-- [x] **WordPress Media**: Agregar herramientas para gestionar la biblioteca de medios.
-- [x] **WordPress Users**: Gestión avanzada de usuarios (más allá de clientes WooCommerce).
-- [x] **Refactorización de Controllers**: Asegurar que todos los controllers sigan el patrón DDD.
-- [x] **Plugins & Themes**: Consultar estado de plugins y temas activos.
+## Fase 3: Interoperabilidad Cross-MCP
+- [ ] **Pruebas de Correlación**: Validar el flujo de datos usando el email entre este MCP y Chatwoot/Clarity.
+- [ ] **Manejo de Latencia**: Implementar advertencias en las respuestas de reportes si se detecta que los datos podrían no estar sincronizados con otros MCPs (ej. Analytics).
 
 ---
-**Proyecto Finalizado con Éxito - Paridad 100% con Estándares de Calidad**
+**Estado: Fase de Poda Técnica Iniciada**
+Consulte [TODO.done.md](./TODO.done.md) para ver las tareas completadas recientemente.

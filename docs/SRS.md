@@ -1,26 +1,28 @@
 # SRS - WooCommerce MCP Server
 
 ## 1. Propósito
-El propósito de este servidor MCP es proporcionar una interfaz estandarizada para interactuar con tiendas WooCommerce y sitios WordPress, permitiendo a agentes de IA gestionar productos, pedidos, clientes y configuraciones de manera eficiente.
+El propósito de este servidor MCP es actuar como el brazo transaccional y operativo de un **CEO Virtual**. Proporciona una interfaz estandarizada para que agentes de IA orquesten operaciones en WooCommerce y WordPress, integrando estos datos con otras fuentes (Google Analytics, Clarity, Xubio, Chatwoot) para la toma de decisiones estratégicas.
 
 ## 2. Alcance
-El servidor debe cubrir la totalidad de la API REST de WooCommerce v3 y funcionalidades clave de la API REST de WordPress.
+El servidor se optimiza para ofrecer un conjunto de 10 herramientas críticas que permiten al CEO Virtual supervisar la rentabilidad, gestionar el inventario estratégico y profundizar en la relación con el cliente.
 
-### 2.1 Módulos Core (WooCommerce)
-- **Productos**: Gestión de catálogo, variaciones, atributos, categorías, etiquetas y reseñas.
-- **Pedidos**: Ciclo de vida de pedidos, notas y reembolsos.
-- **Clientes**: Gestión de perfiles y descargas.
-- **Cupones**: Gestión de descuentos.
-- **Envíos y Tasas**: Configuración de zonas, métodos y clases de impuestos.
-- **Reportes**: Análisis de ventas, stock, clientes y reportes de totales.
-- **Sistema**: Estado del sistema, herramientas de mantenimiento, ajustes de tienda, webhooks, plugins y temas.
-- **Operaciones Batch**: Soporte para creación y actualización masiva de productos y pedidos.
+### 2.1 Herramientas Core (Prioridad CEO)
+Para maximizar la eficiencia y reducir el overhead, se seleccionan las siguientes herramientas clave (optimizadas para ~10-12 endpoints):
+1.  **get_sales_report**: Análisis de ingresos y salud financiera.
+2.  **get_products_report**: Identificación de productos de alto/bajo rendimiento.
+3.  **get_stock_report**: Supervisión de niveles de inventario estratégicos.
+4.  **get_orders**: Seguimiento de flujo transaccional.
+5.  **update_order**: Gestión de excepciones y cambios de estado críticos.
+6.  **get_customers_report**: Análisis de LTV y fidelidad.
+7.  **get_customer**: Vista 360 del cliente (email para cruce con Chatwoot/Clarity).
+8.  **update_customer**: Segmentación y gestión de perfiles VIP.
+9.  **get_products**: Consulta y filtrado de catálogo.
+10. **batch_products**: Ajustes masivos (requiere confirmación si afecta >10% stock/precio).
+11. **get_coupons**: Evaluación de impacto de promociones.
+12. **get_system_status**: Verificación de integridad técnica.
 
-### 2.2 Módulos WordPress
-- **Posts**: Gestión de contenido básico.
-- **Media**: Gestión de la biblioteca de medios.
-- **Usuarios**: Gestión completa de usuarios y roles de WordPress.
-- **Meta Data**: Gestión de metadatos personalizados para posts, productos, pedidos y clientes.
+### 2.2 Desactivación de Herramientas Extendidas
+Se eliminan o desactivan las 126 herramientas restantes (metadatos granulares, configuraciones menores de envío/impuestos, gestión individual de posts/usuarios no comerciales) para optimizar el contexto del modelo de IA.
 
 ## 3. Requerimientos Técnicos
 - **Lenguaje**: TypeScript.
@@ -29,7 +31,8 @@ El servidor debe cubrir la totalidad de la API REST de WooCommerce v3 y funciona
 - **Comunicación**: Stdin/Stdout para compatibilidad con clientes MCP.
 - **Seguridad**: Autenticación vía Consumer Key/Secret para WooCommerce y Basic Auth para WordPress.
 
-## 4. Requerimientos de Calidad (Paridad con Xubio)
-- **Paridad de API**: Implementación del 100% de los endpoints GET disponibles en la documentación oficial de WooCommerce v3.
-- **Testeabilidad**: Cobertura de tests de integración para todas las herramientas registradas.
-- **Documentación**: README actualizado con todas las herramientas disponibles y ejemplos de uso.
+## 4. Requerimientos de Calidad
+- **Eficiencia de Herramientas**: Selección del 50% de herramientas con mayor valor operativo para reducir el overhead del protocolo.
+- **Paridad de Entidades**: Cobertura completa de las entidades principales (Products, Orders, Customers) aunque se reduzcan los endpoints de metadatos específicos.
+- **Testeabilidad**: Cobertura de tests de integración para todas las herramientas marcadas como Core.
+- **Documentación**: README actualizado identificando claramente las herramientas Core vs. Inactivas.

@@ -74,7 +74,7 @@ For WordPress-specific methods (like managing posts), you need to provide:
 
 ## API Methods
 
-The server supports both WordPress and WooCommerce API methods. Here's a list of available methods grouped by category:
+The server supports both WordPress and WooCommerce API methods. **Note:** In the "Optimization Proposal" below, tools marked with `(Inactive)` are proposed for deactivation to reduce the toolset by 50% while maintaining core functionality.
 
 ### WordPress Content Management
 
@@ -87,10 +87,10 @@ These methods require WordPress username/password credentials and are independen
 | `create_post` | Create a new WordPress post |
 | `update_post` | Update an existing WordPress post |
 | `delete_post` | Delete a WordPress post |
-| `get_post_meta` | Get post metadata |
-| `update_post_meta` | Update post metadata |
-| `create_post_meta` | Create post metadata |
-| `delete_post_meta` | Delete post metadata |
+| `get_post_meta` | **(Inactive)** Get post metadata |
+| `update_post_meta` | **(Inactive)** Update post metadata |
+| `create_post_meta` | **(Inactive)** Create post metadata |
+| `delete_post_meta` | **(Inactive)** Delete post metadata |
 
 ### WordPress Users
 
@@ -100,7 +100,7 @@ These methods require WordPress username/password credentials and are independen
 | `get_user` | Retrieve a single user |
 | `create_user` | Create a new WordPress user |
 | `update_user` | Update an existing user |
-| `delete_user` | Delete a WordPress user |
+| `delete_user` | **(Inactive)** Delete a WordPress user |
 
 ### WordPress Media
 
@@ -119,10 +119,10 @@ These methods require WordPress username/password credentials and are independen
 | `update_product` | Update an existing product |
 | `delete_product` | Delete a product |
 | `batch_products` | Create/Update/Delete products in batch |
-| `get_product_meta` | Get product metadata |
-| `create_product_meta` | Create/update product metadata |
-| `update_product_meta` | Update product metadata (alias for create) |
-| `delete_product_meta` | Delete product metadata |
+| `get_product_meta` | **(Inactive)** Get product metadata |
+| `create_product_meta` | **(Inactive)** Create/update product metadata |
+| `update_product_meta` | **(Inactive)** Update product metadata (alias for create) |
+| `delete_product_meta` | **(Inactive)** Delete product metadata |
 
 ### Product Categories
 
@@ -140,9 +140,9 @@ These methods require WordPress username/password credentials and are independen
 |--------|-------------|
 | `get_product_tags` | Retrieve product tags |
 | `get_product_tag` | Get a single product tag |
-| `create_product_tag` | Create a new product tag |
-| `update_product_tag` | Update a product tag |
-| `delete_product_tag` | Delete a product tag |
+| `create_product_tag` | **(Inactive)** Create a new product tag |
+| `update_product_tag` | **(Inactive)** Update a product tag |
+| `delete_product_tag` | **(Inactive)** Delete a product tag |
 
 ### Product Attributes
 
@@ -150,14 +150,14 @@ These methods require WordPress username/password credentials and are independen
 |--------|-------------|
 | `get_product_attributes` | Retrieve product attributes |
 | `get_product_attribute` | Get a single product attribute |
-| `create_product_attribute` | Create a new product attribute |
-| `update_product_attribute` | Update a product attribute |
-| `delete_product_attribute` | Delete a product attribute |
-| `get_attribute_terms` | Retrieve attribute terms |
-| `get_attribute_term` | Get a single attribute term |
-| `create_attribute_term` | Create a new attribute term |
-| `update_attribute_term` | Update an attribute term |
-| `delete_attribute_term` | Delete an attribute term |
+| `create_product_attribute` | **(Inactive)** Create a new product attribute |
+| `update_product_attribute` | **(Inactive)** Update a product attribute |
+| `delete_product_attribute` | **(Inactive)** Delete a product attribute |
+| `get_attribute_terms` | **(Inactive)** Retrieve attribute terms |
+| `get_attribute_term` | **(Inactive)** Get a single attribute term |
+| `create_attribute_term` | **(Inactive)** Create a new attribute term |
+| `update_attribute_term` | **(Inactive)** Update an attribute term |
+| `delete_attribute_term` | **(Inactive)** Delete an attribute term |
 
 ### Product Variations
 
@@ -173,11 +173,11 @@ These methods require WordPress username/password credentials and are independen
 
 | Method | Description |
 |--------|-------------|
-| `get_product_reviews` | Retrieve product reviews |
-| `get_product_review` | Get a single product review |
-| `create_product_review` | Create a new product review |
-| `update_product_review` | Update a product review |
-| `delete_product_review` | Delete a product review |
+| `get_product_reviews` | **(Inactive)** Retrieve product reviews |
+| `get_product_review` | **(Inactive)** Get a single product review |
+| `create_product_review` | **(Inactive)** Create a new product review |
+| `update_product_review` | **(Inactive)** Update a product review |
+| `delete_product_review` | **(Inactive)** Delete a product review |
 
 ### WooCommerce Orders
 
@@ -200,18 +200,18 @@ These methods require WordPress username/password credentials and are independen
 | Method | Description |
 |--------|-------------|
 | `get_order_notes` | Retrieve order notes |
-| `get_order_note` | Get a single order note |
+| `get_order_note` | **(Inactive)** Get a single order note |
 | `create_order_note` | Create a new order note |
-| `delete_order_note` | Delete an order note |
+| `delete_order_note` | **(Inactive)** Delete an order note |
 
 ### Order Refunds
 
 | Method | Description |
 |--------|-------------|
-| `get_order_refunds` | Retrieve order refunds |
-| `get_order_refund` | Get a single order refund |
+| `get_order_refunds` | **(Inactive)** Retrieve order refunds |
+| `get_order_refund` | **(Inactive)** Get a single order refund |
 | `create_order_refund` | Create a new order refund |
-| `delete_order_refund` | Delete an order refund |
+| `delete_order_refund` | **(Inactive)** Delete an order refund |
 
 ### WooCommerce Customers
 
@@ -222,10 +222,10 @@ These methods require WordPress username/password credentials and are independen
 | `create_customer` | Create a new customer |
 | `update_customer` | Update an existing customer |
 | `delete_customer` | Delete a customer |
-| `get_customer_meta` | Get customer metadata |
-| `create_customer_meta` | Create/update customer metadata |
-| `update_customer_meta` | Update customer metadata (alias for create) |
-| `delete_customer_meta` | Delete customer metadata |
+| `get_customer_meta` | **(Inactive)** Get customer metadata |
+| `create_customer_meta` | **(Inactive)** Create/update customer metadata |
+| `update_customer_meta` | **(Inactive)** Update customer metadata (alias for create) |
+| `delete_customer_meta` | **(Inactive)** Delete customer metadata |
 | `get_customer_downloads` | Retrieve customer downloads |
 
 ### Shipping
@@ -233,32 +233,32 @@ These methods require WordPress username/password credentials and are independen
 | Method | Description |
 |--------|-------------|
 | `get_shipping_zones` | Retrieve shipping zones |
-| `get_shipping_zone` | Get a single shipping zone |
-| `create_shipping_zone` | Create a new shipping zone |
-| `update_shipping_zone` | Update a shipping zone |
-| `delete_shipping_zone` | Delete a shipping zone |
+| `get_shipping_zone` | **(Inactive)** Get a single shipping zone |
+| `create_shipping_zone` | **(Inactive)** Create a new shipping zone |
+| `update_shipping_zone` | **(Inactive)** Update a shipping zone |
+| `delete_shipping_zone` | **(Inactive)** Delete a shipping zone |
 | `get_shipping_methods` | Retrieve shipping methods |
-| `get_shipping_zone_methods` | Get shipping methods for a zone |
-| `create_shipping_zone_method` | Create a new shipping method for a zone |
-| `update_shipping_zone_method` | Update a shipping method for a zone |
-| `delete_shipping_zone_method` | Delete a shipping method from a zone |
-| `get_shipping_zone_locations` | Get locations for a shipping zone |
-| `update_shipping_zone_locations` | Update locations for a shipping zone |
+| `get_shipping_zone_methods` | **(Inactive)** Get shipping methods for a zone |
+| `create_shipping_zone_method` | **(Inactive)** Create a new shipping method for a zone |
+| `update_shipping_zone_method` | **(Inactive)** Update a shipping method for a zone |
+| `delete_shipping_zone_method` | **(Inactive)** Delete a shipping method from a zone |
+| `get_shipping_zone_locations` | **(Inactive)** Get locations for a shipping zone |
+| `update_shipping_zone_locations` | **(Inactive)** Update locations for a shipping zone |
 | `get_shipping_classes` | Retrieve shipping classes |
-| `get_shipping_class` | Retrieve a single shipping class |
+| `get_shipping_class` | **(Inactive)** Retrieve a single shipping class |
 
 ### Taxes
 
 | Method | Description |
 |--------|-------------|
 | `get_tax_classes` | Retrieve tax classes |
-| `create_tax_class` | Create a new tax class |
-| `delete_tax_class` | Delete a tax class |
+| `create_tax_class` | **(Inactive)** Create a new tax class |
+| `delete_tax_class` | **(Inactive)** Delete a tax class |
 | `get_tax_rates` | Retrieve tax rates |
-| `get_tax_rate` | Get a single tax rate |
-| `create_tax_rate` | Create a new tax rate |
-| `update_tax_rate` | Update a tax rate |
-| `delete_tax_rate` | Delete a tax rate |
+| `get_tax_rate` | **(Inactive)** Get a single tax rate |
+| `create_tax_rate` | **(Inactive)** Create a new tax rate |
+| `update_tax_rate` | **(Inactive)** Update a tax rate |
+| `delete_tax_rate` | **(Inactive)** Delete a tax rate |
 
 ### Discounts/Coupons
 
@@ -267,71 +267,71 @@ These methods require WordPress username/password credentials and are independen
 | `get_coupons` | Retrieve coupons |
 | `get_coupon` | Get a single coupon |
 | `create_coupon` | Create a new coupon |
-| `update_coupon` | Update a coupon |
-| `delete_coupon` | Delete a coupon |
+| `update_coupon` | **(Inactive)** Update a coupon |
+| `delete_coupon` | **(Inactive)** Delete a coupon |
 
 ### Payment Gateways
 
 | Method | Description |
 |--------|-------------|
 | `get_payment_gateways` | Retrieve payment gateways |
-| `get_payment_gateway` | Get a single payment gateway |
-| `update_payment_gateway` | Update a payment gateway |
+| `get_payment_gateway` | **(Inactive)** Get a single payment gateway |
+| `update_payment_gateway` | **(Inactive)** Update a payment gateway |
 
 ### Reports
 
 | Method | Description |
 |--------|-------------|
 | `get_sales_report` | Get sales report |
-| `get_top_sellers_report` | Get top sellers report |
-| `get_products_report` | Get products report |
-| `get_orders_report` | Get orders report |
-| `get_orders_totals_report` | Get order totals report |
-| `get_products_totals_report` | Get product totals report |
-| `get_customers_totals_report` | Get customer totals report |
-| `get_coupons_totals_report` | Get coupon totals report |
-| `get_categories_report` | Get categories report |
-| `get_customers_report` | Get customers report |
+| `get_top_sellers_report` | **(Inactive)** Get top sellers report |
+| `get_products_report` | **(Inactive)** Get products report |
+| `get_orders_report` | **(Inactive)** Get orders report |
+| `get_orders_totals_report` | **(Inactive)** Get order totals report |
+| `get_products_totals_report` | **(Inactive)** Get product totals report |
+| `get_customers_totals_report` | **(Inactive)** Get customer totals report |
+| `get_coupons_totals_report` | **(Inactive)** Get coupon totals report |
+| `get_categories_report` | **(Inactive)** Get categories report |
+| `get_customers_report` | **(Inactive)** Get customers report |
 | `get_stock_report` | Get stock report |
-| `get_coupons_report` | Get coupons report |
-| `get_taxes_report` | Get taxes report |
+| `get_coupons_report` | **(Inactive)** Get coupons report |
+| `get_taxes_report` | **(Inactive)** Get taxes report |
 
 ### Settings
 
 | Method | Description |
 |--------|-------------|
 | `get_settings` | Retrieve all settings |
-| `get_setting_options` | Retrieve options for a setting group |
-| `get_setting_option` | Retrieve a single setting option |
+| `get_setting_options` | **(Inactive)** Retrieve options for a setting group |
+| `get_setting_option` | **(Inactive)** Retrieve a single setting option |
 | `update_settings_option` | Update a setting option |
-| `get_plugins` | Retrieve list of active plugins |
-| `get_themes` | Retrieve list of installed themes |
+| `get_plugins` | **(Inactive)** Retrieve list of active plugins |
+| `get_themes` | **(Inactive)** Retrieve list of installed themes |
 
 ### System Status
 
 | Method | Description |
 |--------|-------------|
 | `get_system_status` | Retrieve system status |
-| `get_system_status_tools` | Retrieve system status tools |
-| `run_system_status_tool` | Run a system status tool |
+| `get_system_status_tools` | **(Inactive)** Retrieve system status tools |
+| `run_system_status_tool` | **(Inactive)** Run a system status tool |
 
 ### Webhooks
 
 | Method | Description |
 |--------|-------------|
-| `get_webhooks` | Retrieve webhooks |
-| `get_webhook` | Get a single webhook |
-| `create_webhook` | Create a new webhook |
-| `update_webhook` | Update an existing webhook |
-| `delete_webhook` | Delete a webhook |
+| `get_webhooks` | **(Inactive)** Retrieve webhooks |
+| `get_webhook` | **(Inactive)** Get a single webhook |
+| `create_webhook` | **(Inactive)** Create a new webhook |
+| `update_webhook` | **(Inactive)** Update an existing webhook |
+| `delete_webhook` | **(Inactive)** Delete a webhook |
 
 ### Data
 
 | Method | Description |
 |--------|-------------|
-| `get_data` | Retrieve store data |
-| `get_data_index` | Retrieve data index |
-| `get_continents` | Retrieve continents data |
+| `get_data` | **(Inactive)** Retrieve store data |
+| `get_data_index` | **(Inactive)** Retrieve data index |
+| `get_continents` | **(Inactive)** Retrieve continents data |
 | `get_countries` | Retrieve countries data |
 | `get_currencies` | Retrieve currencies data |
 | `get_current_currency` | Get the current currency |
