@@ -1,26 +1,21 @@
 [![MseeP.ai Security Assessment Badge](https://mseep.net/mseep-audited.png)](https://mseep.ai/app/techspawn-woocommerce-mcp-server)
 
-# WooCommerce MCP Server
+# WooCommerce MCP Server (Virtual CEO Edition)
 
-A Model Context Protocol (MCP) server for WooCommerce integration, compatible with Windows, macOS, and Linux.
+A Model Context Protocol (MCP) server optimized for strategic store management, providing high-level tools for a "Virtual CEO" persona.
 
 ## Overview
 
-This MCP server enables interaction with WooCommerce stores through the WordPress REST API. It provides comprehensive tools for managing all aspects of products, orders, customers, shipping, taxes, discounts, and store configuration using JSON-RPC 2.0 protocol.
+This server is a specialized edition of the WooCommerce MCP, designed to minimize context overhead for AI agents while maximizing strategic impact. It provides 12 core tools that integrate with a broader ecosystem (Clarity, Chatwoot, Xubio) using the customer's email as a universal identifier.
 
-## Documentation
+## Core Features
 
-Detailed documentation about the project structure and how to extend it:
+- **Strategic Reporting**: High-level sales, product, and stock reports.
+- **Identity Mapping**: Guaranteed email presence in responses for cross-platform correlation.
+- **Safety Protocol**: Built-in rules for mass operations (`batch_products`).
+- **Audit Logging**: Full traceability of critical actions.
 
-- [Architecture Overview](docs/architecture.md) - Clean Architecture and DDD principles.
-- [Domain Model](docs/domain.md) - Bounded contexts and entities.
-- [Development Guide](docs/development.md) - How to add new tools and maintain the server.
-
-### Related Project
-
-**Showcase your WooCommerce store to 800+ million ChatGPT users!** Check out [WooCommerce ChatGPT App](https://github.com/techspawn/woocommerce-chatgpt-app) - A visual shopping assistant built using MCP and ChatGPT SDK with beautiful UI displaying products, images, prices, and descriptions. Browse, search, filter, and seamlessly navigate to your store - all within ChatGPT. 
-
-## Installation - WooCommerce MCP Server
+## Installation
 
 1. Clone the repository
 2. Install dependencies:
@@ -34,17 +29,7 @@ npm run build
 
 ## Configuration
 
-The server can be configured using a `.env` file in the root directory or through environment variables in your MCP client settings.
-
-### Automatic Configuration
-The easiest way to configure the server is to run the built-in assistant:
-```bash
-npm run configure
-```
-This will guide you through the process and create a `.env` file for you.
-
-### Manual Configuration (.env)
-Create a `.env` file in the root directory with the following **3 core variables**:
+The server requires 3 core environment variables:
 
 ```env
 WOOCOMMERCE_URL=https://your-store.com
@@ -52,417 +37,32 @@ WOOCOMMERCE_CONSUMER_KEY=ck_your_consumer_key
 WOOCOMMERCE_CONSUMER_SECRET=cs_your_consumer_secret
 ```
 
-#### Environment Variables Detail:
-- `WOOCOMMERCE_URL`: Your WordPress/WooCommerce site URL.
-- `WOOCOMMERCE_CONSUMER_KEY`: WooCommerce REST API consumer key (Read/Write access recommended).
-- `WOOCOMMERCE_CONSUMER_SECRET`: WooCommerce REST API consumer secret.
-
-#### Optional Variables (for WordPress API):
+Optional for WordPress System status:
 - `WORDPRESS_USERNAME`: WordPress username.
 - `WORDPRESS_PASSWORD`: WordPress application password.
 
-
-## Authentication Options
-
-### WooCommerce Authentication
-WooCommerce API access requires consumer keys that you can generate in your WordPress dashboard under WooCommerce → Settings → Advanced → REST API.
-
-### WordPress Authentication
-For WordPress-specific methods (like managing posts), you need to provide:
-- Username/password credentials for basic authentication
-- The WordPress REST API must be enabled on your site
-
-## API Methods
-
-The server supports both WordPress and WooCommerce API methods. **Note:** In the "Optimization Proposal" below, tools marked with `(Inactive)` are proposed for deactivation to reduce the toolset by 50% while maintaining core functionality.
-
-### WordPress Content Management
-
-These methods require WordPress username/password credentials and are independent of the WooCommerce API.
+## API Tools (Virtual CEO Set)
 
 | Method | Description |
 |--------|-------------|
-| `get_posts` | Retrieve WordPress posts |
-| `get_post` | Retrieve a single WordPress post |
-| `create_post` | Create a new WordPress post |
-| `update_post` | Update an existing WordPress post |
-| `delete_post` | Delete a WordPress post |
-| `get_post_meta` | **(Inactive)** Get post metadata |
-| `update_post_meta` | **(Inactive)** Update post metadata |
-| `create_post_meta` | **(Inactive)** Create post metadata |
-| `delete_post_meta` | **(Inactive)** Delete post metadata |
-
-### WordPress Users
-
-| Method | Description |
-|--------|-------------|
-| `get_users` | Retrieve WordPress users |
-| `get_user` | Retrieve a single user |
-| `create_user` | Create a new WordPress user |
-| `update_user` | Update an existing user |
-| `delete_user` | **(Inactive)** Delete a WordPress user |
-
-### WordPress Media
-
-| Method | Description |
-|--------|-------------|
-| `get_media` | Retrieve WordPress media library |
-| `get_medium` | Retrieve a single media item |
-
-### WooCommerce Products
-
-| Method | Description |
-|--------|-------------|
-| `get_products` | Retrieve a list of products |
-| `get_product` | Get a single product by ID |
-| `create_product` | Create a new product |
-| `update_product` | Update an existing product |
-| `delete_product` | Delete a product |
-| `batch_products` | Create/Update/Delete products in batch |
-| `get_product_meta` | **(Inactive)** Get product metadata |
-| `create_product_meta` | **(Inactive)** Create/update product metadata |
-| `update_product_meta` | **(Inactive)** Update product metadata (alias for create) |
-| `delete_product_meta` | **(Inactive)** Delete product metadata |
-
-### Product Categories
-
-| Method | Description |
-|--------|-------------|
-| `get_product_categories` | Retrieve product categories |
-| `get_product_category` | Get a single product category |
-| `create_product_category` | Create a new product category |
-| `update_product_category` | Update a product category |
-| `delete_product_category` | Delete a product category |
-
-### Product Tags
-
-| Method | Description |
-|--------|-------------|
-| `get_product_tags` | Retrieve product tags |
-| `get_product_tag` | Get a single product tag |
-| `create_product_tag` | **(Inactive)** Create a new product tag |
-| `update_product_tag` | **(Inactive)** Update a product tag |
-| `delete_product_tag` | **(Inactive)** Delete a product tag |
-
-### Product Attributes
-
-| Method | Description |
-|--------|-------------|
-| `get_product_attributes` | Retrieve product attributes |
-| `get_product_attribute` | Get a single product attribute |
-| `create_product_attribute` | **(Inactive)** Create a new product attribute |
-| `update_product_attribute` | **(Inactive)** Update a product attribute |
-| `delete_product_attribute` | **(Inactive)** Delete a product attribute |
-| `get_attribute_terms` | **(Inactive)** Retrieve attribute terms |
-| `get_attribute_term` | **(Inactive)** Get a single attribute term |
-| `create_attribute_term` | **(Inactive)** Create a new attribute term |
-| `update_attribute_term` | **(Inactive)** Update an attribute term |
-| `delete_attribute_term` | **(Inactive)** Delete an attribute term |
-
-### Product Variations
-
-| Method | Description |
-|--------|-------------|
-| `get_product_variations` | Retrieve product variations |
-| `get_product_variation` | Get a single product variation |
-| `create_product_variation` | Create a new product variation |
-| `update_product_variation` | Update a product variation |
-| `delete_product_variation` | Delete a product variation |
-
-### Product Reviews
-
-| Method | Description |
-|--------|-------------|
-| `get_product_reviews` | **(Inactive)** Retrieve product reviews |
-| `get_product_review` | **(Inactive)** Get a single product review |
-| `create_product_review` | **(Inactive)** Create a new product review |
-| `update_product_review` | **(Inactive)** Update a product review |
-| `delete_product_review` | **(Inactive)** Delete a product review |
-
-### WooCommerce Orders
-
-| Method | Description |
-|--------|-------------|
-| `get_orders` | Retrieve a list of orders |
-| `get_order` | Get a single order by ID |
-| `create_order` | Create a new order |
-| `update_order` | Update an existing order |
-| `delete_order` | Delete an order |
-| `batch_orders` | Create/Update/Delete orders in batch |
-| `get_order_meta` | Get order metadata |
-| `create_order_meta` | Create/update order metadata |
-| `update_order_meta` | Update order metadata (alias for create) |
-| `delete_order_meta` | Delete order metadata |
-| `get_order_statuses` | Retrieve order statuses |
-
-### Order Notes
-
-| Method | Description |
-|--------|-------------|
-| `get_order_notes` | Retrieve order notes |
-| `get_order_note` | **(Inactive)** Get a single order note |
-| `create_order_note` | Create a new order note |
-| `delete_order_note` | **(Inactive)** Delete an order note |
-
-### Order Refunds
-
-| Method | Description |
-|--------|-------------|
-| `get_order_refunds` | **(Inactive)** Retrieve order refunds |
-| `get_order_refund` | **(Inactive)** Get a single order refund |
-| `create_order_refund` | Create a new order refund |
-| `delete_order_refund` | **(Inactive)** Delete an order refund |
-
-### WooCommerce Customers
-
-| Method | Description |
-|--------|-------------|
-| `get_customers` | Retrieve a list of customers |
-| `get_customer` | Get a single customer by ID |
-| `create_customer` | Create a new customer |
-| `update_customer` | Update an existing customer |
-| `delete_customer` | Delete a customer |
-| `get_customer_meta` | **(Inactive)** Get customer metadata |
-| `create_customer_meta` | **(Inactive)** Create/update customer metadata |
-| `update_customer_meta` | **(Inactive)** Update customer metadata (alias for create) |
-| `delete_customer_meta` | **(Inactive)** Delete customer metadata |
-| `get_customer_downloads` | Retrieve customer downloads |
-
-### Shipping
-
-| Method | Description |
-|--------|-------------|
-| `get_shipping_zones` | Retrieve shipping zones |
-| `get_shipping_zone` | **(Inactive)** Get a single shipping zone |
-| `create_shipping_zone` | **(Inactive)** Create a new shipping zone |
-| `update_shipping_zone` | **(Inactive)** Update a shipping zone |
-| `delete_shipping_zone` | **(Inactive)** Delete a shipping zone |
-| `get_shipping_methods` | Retrieve shipping methods |
-| `get_shipping_zone_methods` | **(Inactive)** Get shipping methods for a zone |
-| `create_shipping_zone_method` | **(Inactive)** Create a new shipping method for a zone |
-| `update_shipping_zone_method` | **(Inactive)** Update a shipping method for a zone |
-| `delete_shipping_zone_method` | **(Inactive)** Delete a shipping method from a zone |
-| `get_shipping_zone_locations` | **(Inactive)** Get locations for a shipping zone |
-| `update_shipping_zone_locations` | **(Inactive)** Update locations for a shipping zone |
-| `get_shipping_classes` | Retrieve shipping classes |
-| `get_shipping_class` | **(Inactive)** Retrieve a single shipping class |
-
-### Taxes
-
-| Method | Description |
-|--------|-------------|
-| `get_tax_classes` | Retrieve tax classes |
-| `create_tax_class` | **(Inactive)** Create a new tax class |
-| `delete_tax_class` | **(Inactive)** Delete a tax class |
-| `get_tax_rates` | Retrieve tax rates |
-| `get_tax_rate` | **(Inactive)** Get a single tax rate |
-| `create_tax_rate` | **(Inactive)** Create a new tax rate |
-| `update_tax_rate` | **(Inactive)** Update a tax rate |
-| `delete_tax_rate` | **(Inactive)** Delete a tax rate |
-
-### Discounts/Coupons
-
-| Method | Description |
-|--------|-------------|
-| `get_coupons` | Retrieve coupons |
-| `get_coupon` | Get a single coupon |
-| `create_coupon` | Create a new coupon |
-| `update_coupon` | **(Inactive)** Update a coupon |
-| `delete_coupon` | **(Inactive)** Delete a coupon |
-
-### Payment Gateways
-
-| Method | Description |
-|--------|-------------|
-| `get_payment_gateways` | Retrieve payment gateways |
-| `get_payment_gateway` | **(Inactive)** Get a single payment gateway |
-| `update_payment_gateway` | **(Inactive)** Update a payment gateway |
-
-### Reports
-
-| Method | Description |
-|--------|-------------|
-| `get_sales_report` | Get sales report |
-| `get_top_sellers_report` | **(Inactive)** Get top sellers report |
-| `get_products_report` | **(Inactive)** Get products report |
-| `get_orders_report` | **(Inactive)** Get orders report |
-| `get_orders_totals_report` | **(Inactive)** Get order totals report |
-| `get_products_totals_report` | **(Inactive)** Get product totals report |
-| `get_customers_totals_report` | **(Inactive)** Get customer totals report |
-| `get_coupons_totals_report` | **(Inactive)** Get coupon totals report |
-| `get_categories_report` | **(Inactive)** Get categories report |
-| `get_customers_report` | **(Inactive)** Get customers report |
-| `get_stock_report` | Get stock report |
-| `get_coupons_report` | **(Inactive)** Get coupons report |
-| `get_taxes_report` | **(Inactive)** Get taxes report |
-
-### Settings
-
-| Method | Description |
-|--------|-------------|
-| `get_settings` | Retrieve all settings |
-| `get_setting_options` | **(Inactive)** Retrieve options for a setting group |
-| `get_setting_option` | **(Inactive)** Retrieve a single setting option |
-| `update_settings_option` | Update a setting option |
-| `get_plugins` | **(Inactive)** Retrieve list of active plugins |
-| `get_themes` | **(Inactive)** Retrieve list of installed themes |
-
-### System Status
-
-| Method | Description |
-|--------|-------------|
-| `get_system_status` | Retrieve system status |
-| `get_system_status_tools` | **(Inactive)** Retrieve system status tools |
-| `run_system_status_tool` | **(Inactive)** Run a system status tool |
-
-### Webhooks
-
-| Method | Description |
-|--------|-------------|
-| `get_webhooks` | **(Inactive)** Retrieve webhooks |
-| `get_webhook` | **(Inactive)** Get a single webhook |
-| `create_webhook` | **(Inactive)** Create a new webhook |
-| `update_webhook` | **(Inactive)** Update an existing webhook |
-| `delete_webhook` | **(Inactive)** Delete a webhook |
-
-### Data
-
-| Method | Description |
-|--------|-------------|
-| `get_data` | **(Inactive)** Retrieve store data |
-| `get_data_index` | **(Inactive)** Retrieve data index |
-| `get_continents` | **(Inactive)** Retrieve continents data |
-| `get_countries` | Retrieve countries data |
-| `get_currencies` | Retrieve currencies data |
-| `get_current_currency` | Get the current currency |
-
-## Method Parameters
-
-All methods follow a similar parameter structure. Here are some examples:
-
-### Common Parameters for All Methods
-
-- `siteUrl`: (optional if set in env) WordPress site URL
-
-### Additional Parameters for WooCommerce Methods
-
-- `consumerKey`: (optional if set in env) WooCommerce consumer key
-- `consumerSecret`: (optional if set in env) WooCommerce consumer secret
-
-### Additional Parameters for WordPress Methods
-
-- `username`: (optional if set in env) WordPress username
-- `password`: (optional if set in env) WordPress password
-
-## Example Usage
-
-### WordPress API Example
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "create_post",
-  "params": {
-    "siteUrl": "https://your-wordpress-site.com",
-    "username": "your-wordpress-username",
-    "password": "your-wordpress-password",
-    "title": "My New Blog Post",
-    "content": "This is the content of my new blog post.",
-    "status": "publish"
-  }
-}
-```
-
-### WooCommerce Products Example
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "get_products",
-  "params": {
-    "perPage": 20,
-    "page": 1,
-    "filters": {
-      "category": 19,
-      "status": "publish"
-    }
-  }
-}
-```
-
-### Create Product Example
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "create_product",
-  "params": {
-    "productData": {
-      "name": "Premium T-Shirt",
-      "type": "simple",
-      "regular_price": "29.99",
-      "description": "Comfortable cotton t-shirt, available in various sizes.",
-      "short_description": "Premium quality t-shirt.",
-      "categories": [
-        {
-          "id": 19
-        }
-      ],
-      "images": [
-        {
-          "src": "http://example.com/wp-content/uploads/2022/06/t-shirt.jpg"
-        }
-      ]
-    }
-  }
-}
-```
-
-### Product Metadata Example
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "create_product_meta",
-  "params": {
-    "productId": 456,
-    "metaKey": "_custom_product_field",
-    "metaValue": {
-      "special_attribute": "value",
-      "another_attribute": 42
-    }
-  }
-}
-```
-
-### Order Metadata Example
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "create_order_meta",
-  "params": {
-    "orderId": 789,
-    "metaKey": "_delivery_instructions",
-    "metaValue": "Leave package at the back door"
-  }
-}
-```
-
-## Security Note
-
-For WooCommerce REST API access, you need to generate API keys. You can create them in your WordPress dashboard under WooCommerce → Settings → Advanced → REST API.
-
-## Requirements
-
-- Node.js 20.0.0 or higher
-- WordPress site with WooCommerce plugin installed
-- WooCommerce REST API keys
+| `get_sales_report` | Financial health and revenue analysis. |
+| `get_products_report` | Performance analysis of the product catalog. |
+| `get_stock_report` | Strategic inventory level supervision. |
+| `get_orders` | Transactional flow tracking. |
+| `update_order` | Management of critical order status changes. |
+| `get_customers_report` | Analysis of LTV (Lifetime Value) and loyalty. |
+| `get_customer` | 360° customer view (linked via Email). |
+| `update_customer` | Segmentation and management of VIP profiles. |
+| `get_products` | Catalog consultation and filtering. |
+| `batch_products` | Bulk adjustments (Safety rule: confirmation for >10% change). |
+| `get_coupons` | Promotion impact evaluation. |
+| `get_system_status` | Technical health and ecosystem integrity check. |
+
+## Documentation
+
+- [Architecture Overview](docs/architecture.md)
+- [Domain Model](docs/domain.md)
+- [Security & Audit](docs/DISCOVERY.md)
 
 ## License
 

@@ -21,8 +21,8 @@ Para maximizar la eficiencia y reducir el overhead, se seleccionan las siguiente
 11. **get_coupons**: Evaluación de impacto de promociones.
 12. **get_system_status**: Verificación de integridad técnica.
 
-### 2.2 Desactivación de Herramientas Extendidas
-Se eliminan o desactivan las 126 herramientas restantes (metadatos granulares, configuraciones menores de envío/impuestos, gestión individual de posts/usuarios no comerciales) para optimizar el contexto del modelo de IA.
+### 2.2 Eliminación de Herramientas Excedentes
+Se han eliminado físicamente del código fuente ~120 herramientas (metadatos granulares, configuraciones de envío/impuestos, gestión de posts/usuarios no comerciales) para garantizar un servidor ligero y un contexto de IA limpio y enfocado exclusivamente en la toma de decisiones estratégicas.
 
 ## 3. Requerimientos Técnicos
 - **Lenguaje**: TypeScript.

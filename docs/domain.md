@@ -1,37 +1,30 @@
-# Dominios y Bounded Contexts
+# Dominios y Bounded Contexts (Edición Virtual CEO)
 
-En este servidor MCP de WooCommerce, hemos identificado los siguientes subdominios clave (Bounded Contexts) basados en la API de WooCommerce:
+En esta edición optimizada del servidor MCP de WooCommerce, nos centramos en los subdominios que aportan valor estratégico para la toma de decisiones:
 
-## 1. Catálogo de Productos (Products)
-Gestiona todo lo relacionado con los productos, variaciones, atributos, categorías y etiquetas.
-- **Entidades**: Product, Variation, Attribute, Category, Tag.
-- **Operaciones**: CRUD completo, gestión de stock, revisiones.
+## 1. Catálogo Estratégico (Products)
+Enfoque en la visibilidad y ajustes masivos del catálogo.
+- **Entidades**: Product.
+- **Operaciones**: Consulta de catálogo y operaciones `batch` para ajustes de stock/precio.
 
-## 2. Gestión de Ventas (Orders)
-Maneja el ciclo de vida de los pedidos, reembolsos y notas de pedido.
-- **Entidades**: Order, Refund, OrderNote.
-- **Operaciones**: Creación de pedidos, actualización de estado, reembolsos parciales/totales.
+## 2. Flujo Transaccional (Orders)
+Maneja el ciclo de vida de los pedidos para seguimiento de ingresos.
+- **Entidades**: Order.
+- **Operaciones**: Seguimiento de flujo y actualización de estados críticos.
 
-## 3. Clientes (Customers)
-Gestiona la información de los usuarios que realizan compras.
+## 3. Inteligencia de Clientes (Customers)
+Gestión de la información de clientes con enfoque en interoperabilidad (Email).
 - **Entidades**: Customer.
-- **Operaciones**: Registro, actualización de perfiles, gestión de direcciones.
+- **Operaciones**: Vista 360 del cliente y gestión de perfiles VIP.
 
-## 4. Promociones (Coupons)
-Controla los cupones de descuento y sus reglas de aplicación.
+## 4. Promociones y Fidelización (Coupons)
+Control de cupones para evaluar impacto comercial.
 - **Entidades**: Coupon.
-- **Operaciones**: Gestión de cupones, límites de uso.
 
-## 5. Logística y Tasas (Shipping & Taxes)
-Configuración de zonas de envío y tasas impositivas.
-- **Entidades**: ShippingZone, TaxRate, TaxClass.
+## 5. Análisis y Salud del Sistema (Reports & System)
+Información agregada y estado técnico.
+- **Entidades**: SalesReport, ProductsReport, StockReport, SystemStatus.
+- **Operaciones**: Reportes de rendimiento macro y verificación de salud técnica.
 
-## 6. Reportes y Sistema (Reports & System)
-Información analítica y estado del sistema.
-- **Entidades**: SalesReport, StockReport, SystemStatus.
-- **Operaciones**: Obtención de estadísticas, ejecución de herramientas de mantenimiento.
-
-## Ubicuas Language (Ejemplos)
-- **Meta Data**: Información adicional flexible adjunta a productos, pedidos o clientes.
-- **Slug**: Identificador amigable para URLs usado en categorías y etiquetas.
-- **SKU**: Stock Keeping Unit, identificador único de inventario.
+---
+*Nota: Los dominios de Logística, Impuestos, Media y Gestión granular de Meta-data han sido eliminados en esta edición para simplificar el modelo de IA.*
