@@ -11,14 +11,20 @@ export class ReportController {
   async handle(method: string, params: any) {
     let reportType = method.replace("get_", "").replace("_report", "");
     
-    // Map specific report types to sub-paths if needed
-    if (reportType.endsWith("_totals")) {
-      reportType = reportType.replace("_totals", "/totals");
-    }
+    // Virtual CEO Specific Mappings
+    const mappings: Record<string, string> = {
+      "sales": "sales",
+      "products": "products/totals",
+      "customers": "customers/totals",
+      "orders": "orders/totals",
+      "stock": "products/totals" // Defaulting to products totals for stock overview
+    };
+
+    const finalType = mappings[reportType] || reportType;
     
     const useCaseParams: GetReportParams = {
-      type: reportType,
-      period: params.period,
+      type: finalType,
+      period: params.period || "month",
       dateMin: params.dateMin,
       dateMax: params.dateMax,
       perPage: params.perPage,

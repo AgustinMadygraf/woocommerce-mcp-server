@@ -67,7 +67,7 @@ async function handleMcpRequest(method: string, params: any): Promise<any> {
       get_customer: "Vista 360 del cliente (email para cruce con Chatwoot/Clarity)",
       update_customer: "Segmentación y gestión de perfiles de clientes VIP",
       get_products: "Consulta y filtrado del catálogo de productos",
-      batch_products: "Ajustes masivos de stock o precios (requiere precaución)",
+      batch_products: "Ajustes masivos de stock o precios. REGLA DE SEGURIDAD: Si la operación afecta a >10% del catálogo, el agente DEBE solicitar confirmación humana explícita.",
       get_coupons: "Evaluación de impacto y gestión de promociones/cupones",
       get_system_status: "Verificación de integridad técnica y salud del ecosistema"
     };

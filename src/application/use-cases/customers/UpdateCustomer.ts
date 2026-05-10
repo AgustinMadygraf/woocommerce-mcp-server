@@ -1,4 +1,5 @@
 import { WooCommerceClient } from "../../../infrastructure/api/WooCommerceClient";
+import { AuditLogger } from "../../../infrastructure/logging/AuditLogger";
 
 export class UpdateCustomerUseCase {
   constructor(private client: WooCommerceClient) {}
@@ -10,6 +11,9 @@ export class UpdateCustomerUseCase {
     if (!customerData) {
       throw new Error("Customer data is required for updating a customer");
     }
+
+    AuditLogger.logAction("UPDATE_CUSTOMER", { customerId, email: customerData.email });
+
     return this.client.put(`/customers/${customerId}`, customerData);
   }
 }

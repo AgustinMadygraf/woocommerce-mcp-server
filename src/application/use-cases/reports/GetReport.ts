@@ -26,6 +26,16 @@ export class GetReportUseCase {
     if (params.perPage) queryParams.per_page = params.perPage;
     if (params.page) queryParams.page = params.page;
 
-    return this.client.get(endpoint, queryParams);
+    const data = await this.client.get(endpoint, queryParams);
+
+    // Add strategic context for the Virtual CEO
+    return {
+      ...data as any,
+      _ceo_context: {
+        source: "WooCommerce Real-Time Transactions",
+        sync_warning: "Los datos externos (Analytics/Clarity) pueden tener un retraso de hasta 24hs respecto a este reporte transaccional.",
+        identity_anchor: "Email"
+      }
+    };
   }
 }

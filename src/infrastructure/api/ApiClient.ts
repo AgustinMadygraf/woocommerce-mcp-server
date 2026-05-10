@@ -39,6 +39,16 @@ export class ApiClient {
   async get<T>(url: string, params?: any): Promise<T> {
     Logger.debug(`GET ${this.client.defaults.baseURL}${url}`, { params });
     const response = await this.client.get<T>(url, { params });
+    
+    // If it's an array and has total headers, wrap it to include metadata for the CEO
+    if (Array.isArray(response.data) && response.headers["x-wp-total"]) {
+      return {
+        items: response.data,
+        totalCount: parseInt(response.headers["x-wp-total"] as string, 10),
+        totalPages: parseInt(response.headers["x-wp-totalpages"] as string, 10)
+      } as any;
+    }
+    
     return response.data;
   }
 
