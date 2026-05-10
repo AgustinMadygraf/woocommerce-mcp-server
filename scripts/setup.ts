@@ -1,4 +1,6 @@
 import * as readline from 'readline';
+import * as path from 'path';
+import { DiscoveryService as SharedDiscovery } from 'mcp-server-core';
 import { DiscoveryService, McpConfig } from '../src/infrastructure/config/DiscoveryService';
 import { Logger } from '../src/infrastructure/logging/Logger';
 
@@ -15,6 +17,7 @@ async function runSetup() {
   console.log('\n🚀 WooCommerce MCP - Asistente de Configuración Inteligente\n');
 
   const discovery = new DiscoveryService();
+  const sharedDiscovery = new SharedDiscovery();
   const existingConfig = await discovery.discover();
 
   const config: McpConfig = { ...existingConfig };
@@ -65,6 +68,18 @@ async function runSetup() {
   if (saved) {
     console.log('\n✅ ¡Configuración completada exitosamente!');
     console.log('Se ha creado/actualizado el archivo .env con tus credenciales.');
+    
+    // Usamos el servicio compartido para registrar en Claude/Gemini
+    await sharedDiscovery.registerServer('woocommerce', {
+      command: 'node',
+      args: [path.join(process.cwd(), 'build/index.js')],
+      env: {
+        WOOCOMMERCE_URL: config.siteUrl!,
+        WOOCOMMERCE_CONSUMER_KEY: config.consumerKey!,
+        WOOCOMMERCE_CONSUMER_SECRET: config.consumerSecret!
+      }
+    });
+
     console.log('Ahora puedes iniciar el servidor con "npm run start" o reiniciar tu cliente MCP.');
   } else {
     console.log('\n❌ No se pudo guardar la configuración automáticamente.');
