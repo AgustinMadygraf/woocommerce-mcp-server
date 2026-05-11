@@ -85,6 +85,7 @@ describe('Unit Tests - Infrastructure', () => {
 
     it('should save config to .env and Gemini', async () => {
       vi.mocked(fs.existsSync).mockReturnValue(true);
+      vi.mocked(fs.readFileSync).mockReturnValue('{}');
       const writeSpy = vi.mocked(fs.writeFileSync);
 
       const success = await service.saveConfig({ siteUrl: 'https://new.com' });

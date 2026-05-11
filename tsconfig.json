@@ -6,9 +6,10 @@
     "esModuleInterop": true,
     "strict": true,
     "outDir": "build",
+    "rootDir": "src",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "scripts/**/*", "scratch/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "build"]
 }
